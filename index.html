@@ -53,7 +53,7 @@ main{max-width:1180px;margin:0 auto;padding:10px 14px 36px;display:grid;gap:10px
 .next.focus{color:var(--acc);font-weight:700;letter-spacing:.1px}
 .next.muted{color:var(--muted);font-weight:500}
 .props{display:grid;gap:10px;grid-template-columns:1.15fr 1.15fr .95fr .95fr;align-items:stretch}
-.prop{display:grid;grid-template-rows:auto auto 1fr auto;gap:8px;min-height:132px;position:relative;overflow:visible}
+.prop{display:grid;grid-template-rows:auto auto auto auto auto;gap:6px;min-height:132px;position:relative;overflow:visible}
 .row1{display:flex;justify-content:space-between;align-items:center;gap:6px;min-height:28px}
 .row1 h3{margin:0;font-size:13px}
 .row1 .layer{color:var(--dim);font-size:10.5px}
@@ -108,6 +108,11 @@ footer details[open]{opacity:1;background:var(--card);border-style:solid}
 .intro .tags{display:inline-flex;gap:5px;flex-wrap:wrap}
 .rc a{color:inherit;text-decoration:none}
 .rc a:hover{color:var(--text);text-decoration:underline}
+.fields{display:grid;gap:2px;font-size:10.5px;line-height:1.35;color:var(--muted);padding:1px 0 2px}
+.fields .fl{display:grid;grid-template-columns:64px 1fr;gap:4px;align-items:start}
+.fields .fl b{color:var(--dim);font-weight:600;font-size:10px;white-space:nowrap}
+.fields .fl span{color:#c5d6e8}
+.etag{font-size:9.5px;padding:1px 6px;border-radius:999px;background:rgba(57,208,216,.1);border:1px solid rgba(57,208,216,.32);color:var(--cy);margin-left:2px;white-space:nowrap}
 </style>
 </head>
 <body>
@@ -141,10 +146,10 @@ footer details[open]{opacity:1;background:var(--card);border-style:solid}
     <div class="card">
       <div class="h">证据带 · 最近并网 · 2026-11-08</div>
       <div class="rec">
-        <span class="rc" data-p="可拆积木"><span class="dotg am"></span><a href="https://github.com/Milesssssss/real2sim-research/blob/main/knowledge/cards/DISCOVERSE.md"><b>DISCOVERSE</b></a><span class="gr am">A-</span></span>
-        <span class="rc" data-p="可拆积木"><span class="dotg am"></span><a href="https://github.com/Milesssssss/real2sim-research/blob/main/knowledge/cards/AtlasGS.md"><b>AtlasGS</b></a><span class="gr am">A-</span></span>
+        <span class="rc" data-p="可拆积木"><span class="dotg am"></span><a href="https://github.com/Milesssssss/real2sim-research/blob/main/knowledge/cards/DISCOVERSE.md"><b>DISCOVERSE</b></a><span class="gr am">A-</span><span class="etag" title="evidence_tags">开源复现</span></span>
+        <span class="rc" data-p="可拆积木"><span class="dotg am"></span><a href="https://github.com/Milesssssss/real2sim-research/blob/main/knowledge/cards/AtlasGS.md"><b>AtlasGS</b></a><span class="gr am">A-</span><span class="etag" title="evidence_tags">外部报道/论文结论</span></span>
         <span class="rc" data-p="可拆积木"><span class="dotg b"></span><a href="https://github.com/Milesssssss/real2sim-research/blob/main/knowledge/cards/Inpaint360GS.md"><b>Inpaint360GS</b></a><span class="gr b">B</span></span>
-        <span class="rc" data-p="多源成景"><span class="dotg am"></span><a href="https://github.com/Milesssssss/real2sim-research/blob/main/knowledge/cards/SimReady-Foundation.md"><b>SimReady</b></a><span class="gr am">A-</span></span>
+        <span class="rc" data-p="多源成景"><span class="dotg am"></span><a href="https://github.com/Milesssssss/real2sim-research/blob/main/knowledge/cards/SimReady-Foundation.md"><b>SimReady</b></a><span class="gr am">A-</span><span class="etag" title="evidence_tags">场景适配工程判断</span></span>
         <span class="rc" data-p="多源成景"><span class="dotg am"></span><a href="https://github.com/Milesssssss/real2sim-research/blob/main/knowledge/cards/X2Real.md"><b>X2Real</b></a><span class="gr am">A-</span></span>
         <span class="rc" data-p="多源成景"><span class="dotg b"></span><a href="https://github.com/Milesssssss/real2sim-research/blob/main/knowledge/cards/3DAlign-DAER.md"><b>3DAlign-DAER</b></a><span class="gr b">B</span></span>
       </div>
@@ -210,7 +215,14 @@ footer details[open]{opacity:1;background:var(--card);border-style:solid}
         <span class="chip stack" title="ObjectGS + DIGS → DISCOVERSE；Flats∥AtlasGS 另条">栈·ObjectGS+DIGS∥DISCOVERSE</span>
         <span class="chip stack" title="3D Gaussian Flats ∥ AtlasGS">Flats∥AtlasGS</span>
       </div>
-      <div class="row3"><div class="next focus" title="Isaac 对象级真机对照；平面/删除分轴 checklist">下一刀 · Isaac 对象级真机对照</div></div>
+      <div class="fields" aria-label="可拆积木字段">
+        <div class="fl"><b>目标</b><span>对象/像素→可组合对象级 GS 资产</span></div>
+        <div class="fl"><b>推荐技术组合</b><span>假设 ObjectGS+DIGS→DISCOVERSE；已验证 MuJoCo 真机缺口已补；Isaac 未验证</span></div>
+        <div class="fl"><b>最近相关证据</b><span>DISCOVERSE 等（ACT/DP·测量）</span></div>
+        <div class="fl"><b>未解瓶颈</b><span>组合几何+对象-环境边界；Isaac 对照仍缺</span></div>
+        <div class="fl"><b>下一实验</b><span>输出物·Isaac 对象级真机对照记录；输入/指标/门槛/负责人 待定义</span></div>
+      </div>
+      <div class="row3"><div class="next focus" title="vs DISCOVERSE MuJoCo；指标/门槛待定义；平面/删除分轴 checklist">下一实验 · Isaac 对象级真机对照（vs DISCOVERSE MuJoCo；指标/门槛待定义）</div></div>
       <details class="more"><summary>开放问题 <span class="n">3</span></summary><div class="q">
         <span class="chip">使用侧消费 Isaac 输出时的字段表仍缺</span>
         <span class="chip">Flats∥AtlasGS 本机对照</span>
@@ -226,7 +238,14 @@ footer details[open]{opacity:1;background:var(--card);border-style:solid}
         <span class="chip stack" title="AffordCraft → LayoutVLM / Steerable；门禁·SimReady 保位">栈·AffordCraft∥Layout/Steerable</span>
         <span class="chip stack" title="SimReady FET + Bench 补强门禁">门禁·SimReady</span>
       </div>
-      <div class="row3"><div class="next muted" title="FET 映射表；场景×资产单一协议；库→gate slope">下一刀 · FET 映射表</div></div>
+      <div class="fields" aria-label="多源成景字段">
+        <div class="fl"><b>目标</b><span>多源→检索/摆放→过门禁场景</span></div>
+        <div class="fl"><b>推荐技术组合</b><span>假设 AffordCraft→Layout/Steerable→门禁；已验证 SimReady 规范补强</span></div>
+        <div class="fl"><b>最近相关证据</b><span>X2Real r=0.84（测量）等</span></div>
+        <div class="fl"><b>未解瓶颈</b><span>元数据/联合协议/gate-pass slope</span></div>
+        <div class="fl"><b>下一实验</b><span>输出物·FET 映射表；对照/指标/门槛/负责人 待定义</span></div>
+      </div>
+      <div class="row3"><div class="next muted" title="AffordCraft G ↔ SimReady FET；对照/门槛待定义；场景×资产协议；库→gate slope">下一实验 · AffordCraft G ↔ SimReady FET 映射（对照/门槛待定义）</div></div>
       <details class="more"><summary>开放问题 <span class="n">3</span></summary><div class="q">
         <span class="chip">AffordCraft G ↔ SimReady FET 映射表</span>
         <span class="chip">场景×资产单一联合协议</span>
@@ -242,7 +261,14 @@ footer details[open]{opacity:1;background:var(--card);border-style:solid}
         <span class="chip stack" title="task-skill 快环 ∥ meta-skill 慢环；stage-win 保位">栈·task-skill∥meta</span>
         <span class="chip stack" title="stage-win 门禁">stage-win</span>
       </div>
-      <div class="row3"><div class="next muted" title="周一 10:00 达摩慢环轻审计（≤3 提案）">下一刀 · 周一慢环轻审计</div></div>
+      <div class="fields" aria-label="不冻栈字段">
+        <div class="fl"><b>目标</b><span>判断栈持续进化不冻结</span></div>
+        <div class="fl"><b>推荐技术组合</b><span>假设 快环∥慢环·stage-win；已验证 技能在跑</span></div>
+        <div class="fl"><b>最近相关证据</b><span>已采纳技能 + 周一慢环节律</span></div>
+        <div class="fl"><b>未解瓶颈</b><span>快/慢环门禁</span></div>
+        <div class="fl"><b>下一实验</b><span>输出物·周一慢环轻审计纪要；对照/指标/门槛 待定义；负责人达摩·周一</span></div>
+      </div>
+      <div class="row3"><div class="next muted" title="达摩·周一；对照/门槛待定义；≤3 提案">下一实验 · 周一慢环轻审计（对照/门槛待定义）</div></div>
       <details class="more"><summary>开放问题 <span class="n">2</span></summary><div class="q">
         <span class="chip">快环技能化漏记检查</span>
         <span class="chip">慢环晋升门禁过严/过松</span>
@@ -258,7 +284,14 @@ footer details[open]{opacity:1;background:var(--card);border-style:solid}
         <span class="chip stage" title="知识网络持续并网">阶段·持续并网</span>
         <span class="chip stack" title="第一性原理三问；六步诊断；A/B/C 采信">栈·三问∥六步∥A/B/C</span>
       </div>
-      <div class="row3"><div class="next muted" title="开放问题驱动采矿；跨方法仿真→真机排序">下一刀 · 开放问题驱动采矿</div></div>
+      <div class="fields" aria-label="判官台字段">
+        <div class="fl"><b>目标</b><span>可辩护路线/风险/实验建议</span></div>
+        <div class="fl"><b>推荐技术组合</b><span>假设 三问→六步→A/B/C；已验证 权威页+本库</span></div>
+        <div class="fl"><b>最近相关证据</b><span>Page + knowledge/cards</span></div>
+        <div class="fl"><b>未解瓶颈</b><span>三层同时够硬</span></div>
+        <div class="fl"><b>下一实验</b><span>采矿窗+排序表草稿；对照/指标/门槛/负责人 待定义</span></div>
+      </div>
+      <div class="row3"><div class="next muted" title="开放问题驱动采矿窗；跨方法仿真→真机排序；对照/门槛待定义">下一实验 · 开放问题驱动采矿（排序对照/门槛待定义）</div></div>
       <details class="more"><summary>开放问题 <span class="n">2</span></summary><div class="q">
         <span class="chip">失败模式同族如何量化</span>
         <span class="chip">仿真→真机排序对照表仍薄</span>
