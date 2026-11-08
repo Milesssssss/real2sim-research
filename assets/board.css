@@ -458,6 +458,45 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,.55); }
   .concept-slot { display: block; }
   .concept-slot img { max-width: 100%; height: auto; }
 }
+
+/* ObjectGS link-only aside (gen-case): no host, no min-width canvas */
+.ext-link-aside {
+  margin: 0 0 12px;
+  border: 1px dashed var(--line);
+  border-radius: 4px;
+  padding: 10px;
+  background: var(--panel);
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+.ext-link-aside .badge {
+  display: inline-block;
+  font-size: 11px;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  padding: 1px 6px;
+  border-radius: 3px;
+  margin-bottom: 6px;
+}
+.ext-link-aside .caption {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.45;
+}
+.ext-link-aside .links {
+  font-size: 12px;
+  margin: 8px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  max-width: 100%;
+}
+.ext-link-aside .links .sep {
+  color: var(--muted);
+}
 .flow-mini {
   display: flex;
   flex-wrap: wrap;
