@@ -1,0 +1,100 @@
+{
+  "$schema_comment": "live visual assets manifest · PR#10 paste · aligned to issue8 empty shell",
+  "meta": {
+    "version": "v1-live",
+    "as_of": "2026-11-08",
+    "timezone": "Asia/Shanghai",
+    "issue": "https://github.com/Milesssssss/real2sim-research/issues/8",
+    "pr_assets": "https://github.com/Milesssssss/real2sim-research/pull/10",
+    "rules": [
+      "class 互斥：每行恰好 ext | concept | local 之一",
+      "图标注 ≠ 四标签自动全绿；四标签仍读 evidence_tags",
+      "抽屉 card/paper/github URL 不是图仓；file_path 与抽屉 href 分离",
+      "rights_status=pending ⇒ host_allowed=false ⇒ 禁止把外部图写成已托管路径",
+      "本机无结果 ⇒ 禁止出现 class=local 行"
+    ]
+  },
+  "assets": [
+    {
+      "id": "va-pipeline-hero-concept",
+      "slot": "pipeline-hero",
+      "method": "—",
+      "class": "concept",
+      "source_url": null,
+      "fig_or_asset": "real2sim-pipeline.svg · 五段主链剖面",
+      "caption": "概念示意 · 非本机 · 自绘 · 非测量 · 五段主链剖面",
+      "license_note": "原创概念示意 · 随 PR#10 入库 · 非测量",
+      "file_path": "assets/visuals/real2sim-pipeline.svg",
+      "rights_status": "n/a",
+      "host_allowed": true,
+      "ui_badge": "概念示意 · 非本机",
+      "cards_ref": null,
+      "target_zone": "技术链路 · 主链概念剖面",
+      "evidence_scope": "本行仅标图来源为概念示意；不点亮四标签任一层；不替代抽屉一跳链接",
+      "notes": "贴板于 #zone-chain · data-slot=pipeline-hero；禁当本机结果",
+      "as_of": "2026-11-08"
+    },
+    {
+      "id": "va-gen-case-layers-concept",
+      "slot": "gen-case-layers",
+      "method": "—",
+      "class": "concept",
+      "source_url": null,
+      "fig_or_asset": "object-asset-layers.svg · RGB/Mask→对象 GS→mesh/collider",
+      "caption": "概念示意 · 非本机 · 自绘 · 非测量 · 非 ObjectGS/DIGS 实测截图",
+      "license_note": "原创概念示意 · 随 PR#10 入库 · 非测量",
+      "file_path": "assets/visuals/object-asset-layers.svg",
+      "rights_status": "n/a",
+      "host_allowed": true,
+      "ui_badge": "概念示意 · 非本机",
+      "cards_ref": null,
+      "target_zone": "对象资产 · 可拆积木概念剖面",
+      "evidence_scope": "概念剖面不代签外/复/本/工；抽屉 URL 另走契约槽",
+      "notes": "贴板于 #zone-assets · data-slot=gen-case-layers",
+      "as_of": "2026-11-08"
+    },
+    {
+      "id": "va-simready-panel-concept",
+      "slot": "simready-panel",
+      "method": "—",
+      "class": "concept",
+      "source_url": null,
+      "fig_or_asset": "simready-validation.svg · 几何/物理/任务验收概念",
+      "caption": "概念示意 · 非本机 · 自绘 · 不代表已运行 SimReady FET · 不表示任何模型已通过",
+      "license_note": "原创概念示意 · 随 PR#10 入库 · C1/C2 已补 · 非测量",
+      "file_path": "assets/visuals/simready-validation.svg",
+      "rights_status": "n/a",
+      "host_allowed": true,
+      "ui_badge": "概念示意 · 非本机",
+      "cards_ref": null,
+      "target_zone": "场景生成 · 多源成景 · 验收概念位",
+      "evidence_scope": "条件项非已通过；不点亮四标签",
+      "notes": "贴板于 #zone-scene · data-slot=simready-panel",
+      "as_of": "2026-11-08"
+    },
+    {
+      "id": "va-gen-case-objectgs-ext",
+      "slot": "gen-case",
+      "method": "ObjectGS",
+      "class": "ext",
+      "source_url": "https://arxiv.org/abs/2507.15454",
+      "fig_or_asset": "待裁 · 官方页/论文 Mask 或对象 GS 对比 Fig（核链后填 Fig 号）",
+      "caption": "外部公开 · 非本机效果 · 出处: arXiv:2507.15454 · 链自 cards",
+      "license_note": "权利未核 · 禁托管 · 合理使用待逐张确认",
+      "file_path": "未下载·权利未核·禁托管",
+      "rights_status": "pending",
+      "host_allowed": false,
+      "ui_badge": "外部公开 · 非本机效果",
+      "cards_ref": "knowledge/cards/ObjectGS.md",
+      "target_zone": "生成支路 · 可拆积木案例位",
+      "evidence_scope": "挂 ext 图 ≠ 本机实验绿；≠ 四标签自动全绿",
+      "notes": "权利 ok 前只留链接与旁注，不下二进制",
+      "as_of": "2026-11-08"
+    }
+  ],
+  "_intentionally_omitted": {
+    "local_rows": "本机无对照帧 → 禁止写 class=local 行",
+    "external_binaries": "不附 PNG/JPG；ext 行 file_path 仅为占位句",
+    "drawer_href_as_file_path": "禁止把 paper/github/card 抽屉链接写入 file_path"
+  }
+}
