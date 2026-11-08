@@ -18,102 +18,144 @@
       <span class="tag">Agent 运行治理</span>
     </span>
   </section>
-  <div class="maturity-row" role="group" aria-label="四命题成熟度（定性·人工判断·非测量值）">
-    <div class="mat"><span>生成 · 可拆积木</span><b title="2026-11-08 · MuJoCo 真机链已补；Isaac 对象级仍薄 · 人工判断">可用</b></div>
-    <div class="mat"><span>使用 · 多源成景</span><b title="2026-11-08 · 默认栈不换；SimReady 门禁补强中 · 人工判断">可用</b></div>
-    <div class="mat"><span title="RSI：递归自改进——任务技能快环+元技能慢环，避免方法栈冻结">RSI · 不冻栈</span><b title="2026-11-08 · 方法论+skill 在线；慢环审计刚起步 · 人工判断">探索</b></div>
-    <div class="mat"><span>总控 · 判官台</span><b title="2026-11-08 · 采信规则在线；开放问题驱动采矿 · 人工判断">可用</b></div>
+
+  <div class="hero" aria-label="首屏决策台">
+    <div class="hero-card focal">
+      <h3>下一项关键实验</h3>
+      <div class="big">Isaac 对象级可组合真机对照（对象资产）</div>
+      <div class="aux">对照：vs DISCOVERSE MuJoCo · 成功准则：待定义 · 输出：真机对照记录</div>
+      <div class="etag-row" aria-label="P1 四标签">
+        <span class="etag on">外部证据 · 有</span>
+        <span class="etag on">作者/第三方复现 · 有</span>
+        <span class="etag off">本机实验 · 无记录</span>
+        <span class="etag mid">工程集成 · 待定</span>
+      </div>
+    </div>
+    <div class="hero-card">
+      <h3>本周变化</h3>
+      <div class="big">并网 DISCOVERSE / AtlasGS / SimReady-Foundation（节选）</div>
+      <div class="aux">成熟度仍为人工判断 · 非测量值 · 详见实验与证据</div>
+    </div>
   </div>
-  <p class="cap">成熟度·人工判断·非测量值 · 真源 <code>knowledge/maturity.md</code> · 导读 <code>knowledge/board-intro.md</code></p>
+
+  <div class="maturity-mini" aria-label="技术成熟度（降权）">
+    <span>对象资产 · 可用</span>
+    <span>场景生成 · 可用</span>
+    <span class="note">治理成熟度见「研究治理」折叠 · 人工判断·非测量值</span>
+  </div>
+  <p class="cap">真源 <code>knowledge/maturity.md</code> · 导读 <code>knowledge/board-intro.md</code> · 写作口径 <code>docs/board-authoring.md</code></p>
 </header>
 
-<!-- ========== A · 主价值链 ========== -->
-<section class="band band-a" id="zone-a" aria-labelledby="h-a">
+<!-- ========== 技术链路 ========== -->
+<section class="band" id="zone-chain" aria-labelledby="h-chain">
   <div class="band-head">
-    <h2 id="h-a">A · 主价值链</h2>
-    <span class="role">最高权重</span>
-    <span class="weight">主链 · 可点节点开抽屉</span>
+    <h2 id="h-chain">技术链路</h2>
+    <span class="weight">输入→资产→场景→仿真→真机</span>
   </div>
-  <p class="hint">七段：真实数据→对象级建模→仿真资产→场景组织→仿真评估→真机对照→反馈。状态用<strong>线型+文字</strong>（不只靠颜色）。区段标注「可拆积木」「多源成景」。点击节点打开六字段抽屉（真源或待定义）。</p>
+  <p class="hint">点击节点查看详情 · 实线=外部证据 · 虚线=待本机 · 点线=关键缺口</p>
+  <div class="resp-bar" aria-label="责任区">
+    <div class="g">责任区 · 生成</div>
+    <div class="u">责任区 · 使用</div>
+    <div class="r">责任区 · 真实验证</div>
+  </div>
 
   <div class="chain-wrap">
     <div>
-      <div class="svg-frame">
-        <svg class="chain" viewBox="0 0 720 220" role="img" aria-labelledby="chain-title chain-desc">
-          <title id="chain-title">Real→Sim→Real 主价值链七节点（示意）</title>
-          <desc id="chain-desc">从左到右：真实数据、对象级建模、仿真资产、场景组织、仿真评估、真机对照、反馈。实线=已有外部证据；虚线=待本机验证；点线=关键缺口。正交折线连接。</desc>
+      <div class="svg-frame chain-desk">
+        <svg class="chain" viewBox="0 0 1100 200" role="img" aria-labelledby="chain-title chain-desc">
+          <title id="chain-title">Real→Sim→Real 技术链路泳道（示意）</title>
+          <desc id="chain-desc">从左到右：输入实体、对象建模、仿真资产、场景组织、仿真评估、真机对照；反馈闭环。责任区：生成、使用、真实验证。</desc>
 
-          <text x="12" y="18" fill="#c4785a" font-size="12" font-family="system-ui,sans-serif">主链（示意）</text>
+          <rect x="8" y="28" width="430" height="120" rx="6" fill="#1e2830" stroke="#3a4250"/>
+          <rect x="446" y="28" width="400" height="120" rx="6" fill="#1e2824" stroke="#3a4250"/>
+          <rect x="854" y="28" width="230" height="120" rx="6" fill="#2a2220" stroke="#5a4038"/>
 
-          <!-- N1 -->
-          <g class="node-btn" data-node="真实数据" tabindex="0" role="button" aria-pressed="false" aria-label="打开节点：真实数据">
-            <rect x="12" y="50" width="86" height="44" rx="6" fill="#242830" stroke="#8a9a7a" stroke-width="2"/>
-            <text x="55" y="70" text-anchor="middle" fill="#c8cdd5" font-size="11" font-family="system-ui,sans-serif">真实数据</text>
-            <text x="55" y="86" text-anchor="middle" fill="#8a9a7a" font-size="9" font-family="system-ui,sans-serif">外部证据</text>
+          <text x="220" y="18" fill="#6a8a9e" font-size="11" font-family="system-ui,sans-serif">生成 · 可拆积木</text>
+          <text x="600" y="18" fill="#8a9a7a" font-size="11" font-family="system-ui,sans-serif">使用 · 多源成景</text>
+          <text x="900" y="18" fill="#c4785a" font-size="11" font-family="system-ui,sans-serif">真实验证</text>
+          <text x="12" y="14" fill="#c4785a" font-size="11" font-family="system-ui,sans-serif">主链（示意）</text>
+
+          <g class="node-btn" data-node="真实数据" tabindex="0" role="button" aria-pressed="false" aria-label="打开节点：输入实体">
+            <rect x="24" y="48" width="88" height="52" rx="5" fill="#2c323c" stroke="#8a9a7a" stroke-width="2"/>
+            <text x="68" y="70" text-anchor="middle" fill="#c8cdd5" font-size="12" font-family="system-ui,sans-serif">输入实体</text>
+            <text x="68" y="86" text-anchor="middle" fill="#7a8494" font-size="10" font-family="system-ui,sans-serif">RGB·Mask</text>
           </g>
-          <path d="M98 72 H118" fill="none" stroke="#8a9a7a" stroke-width="2"/>
-          <polygon points="118,68 128,72 118,76" fill="#8a9a7a"/>
+          <path d="M112 74 H140" fill="none" stroke="#8a9a7a" stroke-width="1.5"/>
 
-          <!-- N2 -->
-          <g class="node-btn" data-node="对象级建模" tabindex="0" role="button" aria-pressed="false" aria-label="打开节点：对象级建模">
-            <rect x="128" y="50" width="86" height="44" rx="6" fill="#242830" stroke="#b0a070" stroke-width="2" stroke-dasharray="5 3"/>
-            <text x="171" y="70" text-anchor="middle" fill="#c8cdd5" font-size="11" font-family="system-ui,sans-serif">对象级建模</text>
-            <text x="171" y="86" text-anchor="middle" fill="#b0a070" font-size="9" font-family="system-ui,sans-serif">待本机验证</text>
+          <g class="node-btn" data-node="对象级建模" tabindex="0" role="button" aria-pressed="false" aria-label="打开节点：对象建模">
+            <rect x="140" y="48" width="88" height="52" rx="5" fill="#2c323c" stroke="#b0a070" stroke-width="2" stroke-dasharray="4 3"/>
+            <text x="184" y="70" text-anchor="middle" fill="#c8cdd5" font-size="12" font-family="system-ui,sans-serif">对象建模</text>
+            <text x="184" y="86" text-anchor="middle" fill="#7a8494" font-size="10" font-family="system-ui,sans-serif">对象 GS</text>
           </g>
-          <path d="M214 72 H234" fill="none" stroke="#b0a070" stroke-width="2" stroke-dasharray="5 3"/>
-          <polygon points="234,68 244,72 234,76" fill="#b0a070"/>
+          <path d="M228 74 H256" fill="none" stroke="#b0a070" stroke-width="1.5" stroke-dasharray="4 3"/>
 
-          <!-- N3 -->
           <g class="node-btn" data-node="仿真资产" tabindex="0" role="button" aria-pressed="false" aria-label="打开节点：仿真资产">
-            <rect x="244" y="50" width="86" height="44" rx="6" fill="#2c323c" stroke="#c4785a" stroke-width="2.5"/>
-            <text x="287" y="68" text-anchor="middle" fill="#c4785a" font-size="11" font-family="system-ui,sans-serif">仿真资产</text>
-            <text x="287" y="84" text-anchor="middle" fill="#8a9a7a" font-size="9" font-family="system-ui,sans-serif">外部证据</text>
+            <rect x="256" y="48" width="88" height="52" rx="5" fill="#2c323c" stroke="#6a8a9e" stroke-width="2.5"/>
+            <text x="300" y="70" text-anchor="middle" fill="#c4785a" font-size="12" font-family="system-ui,sans-serif">仿真资产</text>
+            <text x="300" y="86" text-anchor="middle" fill="#7a8494" font-size="10" font-family="system-ui,sans-serif">mesh·凸碰撞</text>
           </g>
-          <path d="M330 72 H350" fill="none" stroke="#8a9a7a" stroke-width="2"/>
-          <polygon points="350,68 360,72 350,76" fill="#8a9a7a"/>
+          <path d="M344 74 H446" fill="none" stroke="#5a6570" stroke-width="1.5"/>
 
-          <!-- N4 -->
           <g class="node-btn" data-node="场景组织" tabindex="0" role="button" aria-pressed="false" aria-label="打开节点：场景组织">
-            <rect x="360" y="50" width="86" height="44" rx="6" fill="#242830" stroke="#b0a070" stroke-width="2" stroke-dasharray="5 3"/>
-            <text x="403" y="70" text-anchor="middle" fill="#c8cdd5" font-size="11" font-family="system-ui,sans-serif">场景组织</text>
-            <text x="403" y="86" text-anchor="middle" fill="#b0a070" font-size="9" font-family="system-ui,sans-serif">待本机验证</text>
+            <rect x="468" y="48" width="88" height="52" rx="5" fill="#2c323c" stroke="#b0a070" stroke-width="2" stroke-dasharray="4 3"/>
+            <text x="512" y="70" text-anchor="middle" fill="#c8cdd5" font-size="12" font-family="system-ui,sans-serif">场景组织</text>
+            <text x="512" y="86" text-anchor="middle" fill="#7a8494" font-size="10" font-family="system-ui,sans-serif">多源摆放</text>
           </g>
-          <path d="M446 72 H466" fill="none" stroke="#b0a070" stroke-width="2" stroke-dasharray="5 3"/>
-          <polygon points="466,68 476,72 466,76" fill="#b0a070"/>
+          <path d="M556 74 H584" fill="none" stroke="#8a9a7a" stroke-width="1.5" stroke-dasharray="4 3"/>
 
-          <!-- N5 -->
           <g class="node-btn" data-node="仿真评估" tabindex="0" role="button" aria-pressed="false" aria-label="打开节点：仿真评估">
-            <rect x="476" y="50" width="86" height="44" rx="6" fill="#242830" stroke="#8a9a7a" stroke-width="2"/>
-            <text x="519" y="70" text-anchor="middle" fill="#c8cdd5" font-size="11" font-family="system-ui,sans-serif">仿真评估</text>
-            <text x="519" y="86" text-anchor="middle" fill="#8a9a7a" font-size="9" font-family="system-ui,sans-serif">外部证据</text>
+            <rect x="584" y="48" width="88" height="52" rx="5" fill="#2c323c" stroke="#8a9a7a" stroke-width="2"/>
+            <text x="628" y="70" text-anchor="middle" fill="#c8cdd5" font-size="12" font-family="system-ui,sans-serif">仿真评估</text>
+            <text x="628" y="86" text-anchor="middle" fill="#7a8494" font-size="10" font-family="system-ui,sans-serif">门禁 FET</text>
           </g>
-          <path d="M562 72 H582" fill="none" stroke="#9a7070" stroke-width="2.5" stroke-dasharray="2 3"/>
-          <polygon points="582,68 592,72 582,76" fill="#9a7070"/>
+          <path d="M672 74 H854" fill="none" stroke="#5a6570" stroke-width="1.5"/>
 
-          <!-- N6 -->
           <g class="node-btn" data-node="真机对照" tabindex="0" role="button" aria-pressed="false" aria-label="打开节点：真机对照">
-            <rect x="592" y="50" width="86" height="44" rx="6" fill="#242830" stroke="#9a7070" stroke-width="2" stroke-dasharray="2 3"/>
-            <text x="635" y="70" text-anchor="middle" fill="#c8cdd5" font-size="11" font-family="system-ui,sans-serif">真机对照</text>
-            <text x="635" y="86" text-anchor="middle" fill="#9a7070" font-size="9" font-family="system-ui,sans-serif">关键缺口</text>
+            <rect x="880" y="48" width="100" height="52" rx="5" fill="#2c323c" stroke="#c4785a" stroke-width="2" stroke-dasharray="2 3"/>
+            <text x="930" y="70" text-anchor="middle" fill="#c8cdd5" font-size="12" font-family="system-ui,sans-serif">真机对照</text>
+            <text x="930" y="86" text-anchor="middle" fill="#c4785a" font-size="10" font-family="system-ui,sans-serif">关键缺口·Isaac</text>
           </g>
-
-          <!-- feedback loop orthogonal -->
-          <path d="M635 94 V130 H55 V94" fill="none" stroke="#7a8494" stroke-width="1.5" stroke-dasharray="4 3"/>
-          <polygon points="55,94 51,104 59,104" fill="#7a8494"/>
-          <text x="340" y="148" text-anchor="middle" fill="#7a8494" font-size="11" font-family="system-ui,sans-serif">反馈（闭环 · 示意）</text>
 
           <g class="node-btn" data-node="反馈" tabindex="0" role="button" aria-pressed="false" aria-label="打开节点：反馈">
-            <rect x="300" y="158" width="80" height="28" rx="4" fill="#242830" stroke="#7a8494" stroke-width="1.5"/>
-            <text x="340" y="176" text-anchor="middle" fill="#c8cdd5" font-size="11" font-family="system-ui,sans-serif">⑦ 反馈</text>
+            <rect x="880" y="118" width="100" height="28" rx="4" fill="#242830" stroke="#7a8494" stroke-width="1.2" stroke-dasharray="3 2"/>
+            <text x="930" y="136" text-anchor="middle" fill="#7a8494" font-size="11" font-family="system-ui,sans-serif">反馈闭环</text>
           </g>
-
-          <!-- responsibility bands -->
-          <rect x="128" y="195" width="202" height="18" rx="3" fill="none" stroke="#6a8a9e" stroke-width="1"/>
-          <text x="229" y="208" text-anchor="middle" fill="#6a8a9e" font-size="10" font-family="system-ui,sans-serif">可拆积木负责区段（建模→资产）</text>
-          <rect x="360" y="195" width="202" height="18" rx="3" fill="none" stroke="#6a8a9e" stroke-width="1"/>
-          <text x="461" y="208" text-anchor="middle" fill="#6a8a9e" font-size="10" font-family="system-ui,sans-serif">多源成景负责区段（场景→评估）</text>
+          <path d="M930 100 V118" fill="none" stroke="#c4785a" stroke-width="1.5" stroke-dasharray="2 3"/>
+          <path d="M880 132 H20 V74 H24" fill="none" stroke="#7a8494" stroke-width="1.2" stroke-dasharray="3 2"/>
         </svg>
       </div>
+
+      <ol class="stepper" aria-label="技术链路纵向步进">
+        <li>
+          <div class="num">1</div>
+          <div class="body" data-node="真实数据" role="button" tabindex="0" aria-pressed="false"><strong>输入实体</strong><div class="s">RGB · Depth · Mask · 责任区：生成入口</div></div>
+        </li>
+        <li>
+          <div class="num">2</div>
+          <div class="body" data-node="对象级建模" role="button" tabindex="0" aria-pressed="false"><strong>对象建模</strong><div class="s">对象 GS · 待本机 · 责任区：生成</div></div>
+        </li>
+        <li>
+          <div class="num">3</div>
+          <div class="body" data-node="仿真资产" role="button" tabindex="0" aria-pressed="false"><strong>仿真资产</strong><div class="s">mesh · 凸碰撞 · 点开抽屉</div></div>
+        </li>
+        <li>
+          <div class="num">4</div>
+          <div class="body" data-node="场景组织" role="button" tabindex="0" aria-pressed="false"><strong>场景组织</strong><div class="s">多源摆放 · 责任区：使用</div></div>
+        </li>
+        <li>
+          <div class="num">5</div>
+          <div class="body" data-node="仿真评估" role="button" tabindex="0" aria-pressed="false"><strong>仿真评估</strong><div class="s">门禁 FET · 责任区：使用</div></div>
+        </li>
+        <li>
+          <div class="num gap">6</div>
+          <div class="body" data-node="真机对照" role="button" tabindex="0" aria-pressed="false"><strong>真机对照</strong><div class="s">关键缺口 · Isaac · 责任区：真实验证</div></div>
+        </li>
+        <li>
+          <div class="num">7</div>
+          <div class="body" data-node="反馈" role="button" tabindex="0" aria-pressed="false"><strong>反馈闭环</strong><div class="s">开放问题 · 下一实验</div></div>
+        </li>
+      </ol>
+
       <div class="legend">
         <span class="solid"><i></i>实线+文：已有外部证据</span>
         <span class="dashed"><i></i>虚线+文：待本机验证</span>
@@ -127,7 +169,8 @@
         <button type="button" class="drawer-close" id="drawer-close" aria-label="关闭抽屉">关闭</button>
         <h3 id="drawer-title">节点</h3>
         <div class="fields" id="drawer-fields" aria-label="节点字段"></div>
-        <div class="drawer-src" id="drawer-src"></div>
+        <div id="drawer-tags"></div>
+        <div id="drawer-links"></div>
       </div>
     </aside>
   </div>
@@ -137,19 +180,17 @@
   <button type="button" class="drawer-close" id="dlg-close">关闭</button>
   <h3 id="dlg-title" data-dlg-title>节点</h3>
   <div class="fields" data-dlg-fields aria-label="节点字段"></div>
-  <div class="drawer-src" data-dlg-src></div>
+  <div data-dlg-tags></div>
+  <div data-dlg-links></div>
 </dialog>
 
-<!-- ========== B · 两支路 ========== -->
-<section class="band band-b" id="zone-b" aria-labelledby="h-b">
+<!-- ========== 对象资产 ========== -->
+<section class="band" id="zone-assets" aria-labelledby="h-assets">
   <div class="band-head">
-    <h2 id="h-b">B · 两支路（生成 ∥ 使用）</h2>
-    <span class="role">高权重</span>
-    <span class="weight">各：输入 → 方法 → 产出</span>
+    <h2 id="h-assets">对象资产</h2>
+    <span class="weight">生成层 · 可拆积木</span>
   </div>
-  <p class="hint">左右两大区；标介入点；真实案例位空。禁止伪造实验输出当真实效果。</p>
-
-  <div class="branches">
+  <div class="branches" style="grid-template-columns:1fr">
     <div class="branch">
       <h3>可拆积木 · 生成层</h3>
       <div class="sub">命题真源：propositions/可拆积木.md · 等级 B→A- · 成熟度：可用（人工判断）</div>
@@ -162,104 +203,231 @@
       </div>
       <div class="intervene">
         <div class="t">介入点 · 可拆积木</div>
-        ObjectGS（对象 densify）→ DIGS（边界保真）→ DISCOVERSE（MuJoCo 真机闭环）· 导出 Scalable Real2Sim
+        ObjectGS（对象 densify）→ DIGS（边界保真）→ DISCOVERSE（MuJoCo 真机闭环·外部）· 导出 Scalable Real2Sim
       </div>
-      <div class="case-slot">【真实案例位 · 空】<br/>待有本机/可复核案例再填 · 勿贴假图</div>
-      <div class="forbid">禁止：把论文截图/Agent 生成图当作本机效果</div>
+      <div class="etag-row" aria-label="推荐组合四标签">
+        <span class="etag on">外部证据 · 有</span>
+        <span class="etag on">作者/第三方复现 · 有</span>
+        <span class="etag off">本机实验 · 无记录</span>
+        <span class="etag off">工程集成 · 无记录</span>
+      </div>
+      <div class="concept">
+        <span class="badge">概念示意 · 非本机</span>
+        <svg viewBox="0 0 520 72" role="img" aria-label="对象资产概念剖面">
+          <title>对象资产概念剖面（概念示意）</title>
+          <rect x="8" y="16" width="70" height="40" rx="4" fill="#242830" stroke="#6a8a9e"/>
+          <text x="43" y="40" text-anchor="middle" fill="#c8cdd5" font-size="11" font-family="system-ui,sans-serif">RGB+Mask</text>
+          <path d="M78 36 H98" stroke="#7a8494" stroke-width="1.5"/>
+          <rect x="98" y="16" width="70" height="40" rx="4" fill="#242830" stroke="#6a8a9e"/>
+          <text x="133" y="40" text-anchor="middle" fill="#c8cdd5" font-size="11" font-family="system-ui,sans-serif">对象 GS</text>
+          <path d="M168 36 H188" stroke="#7a8494" stroke-width="1.5"/>
+          <rect x="188" y="16" width="90" height="40" rx="4" fill="#242830" stroke="#6a8a9e"/>
+          <text x="233" y="40" text-anchor="middle" fill="#c8cdd5" font-size="11" font-family="system-ui,sans-serif">mesh+惯量</text>
+          <path d="M278 36 H298" stroke="#7a8494" stroke-width="1.5"/>
+          <rect x="298" y="16" width="100" height="40" rx="4" fill="#242830" stroke="#c4785a"/>
+          <text x="348" y="40" text-anchor="middle" fill="#c8cdd5" font-size="11" font-family="system-ui,sans-serif">MuJoCo/Isaac</text>
+          <text x="430" y="40" fill="#7a8494" font-size="10" font-family="system-ui,sans-serif">自绘剖面</text>
+        </svg>
+        <p class="caption">概念示意 · 自绘 · 非测量 · 非本机 · 本机无结果不贴假图</p>
+      </div>
       <div class="fields" aria-label="可拆积木字段" style="margin-top:12px">
         <div class="fl"><b>目标</b><span>对象/像素标注 → 可编辑可复用、可组合进仿真的对象级 GS 资产</span></div>
-        <div class="fl"><b>推荐技术组合</b><span>假设：ObjectGS + DIGS → DISCOVERSE；已验证：MuJoCo 真机（DISCOVERSE）；Isaac 侧未验证</span></div>
+        <div class="fl"><b>推荐技术组合</b><span>假设：ObjectGS + DIGS → DISCOVERSE；外部真机数字见 DISCOVERSE 卡（非本机）；Isaac 侧未验证</span></div>
         <div class="fl"><b>最近关键证据</b><span>DISCOVERSE / ObjectGS / DIGS / AtlasGS 等已并网 · 见 knowledge/cards/</span></div>
         <div class="fl"><b>未解瓶颈</b><span>Isaac 对象级可组合真机对照仍缺；Flats∥AtlasGS；RQS∥Inpaint360GS</span></div>
         <div class="fl"><b>下一实验</b><span>Isaac 对象级真机对照记录；成功准则：待定义</span></div>
       </div>
     </div>
+  </div>
+</section>
 
-    <div class="branch">
-      <h3>多源成景 · 使用层</h3>
-      <div class="sub">命题真源：propositions/多源成景.md · 等级 B→A- · 成熟度：可用（人工判断）</div>
-      <div class="pipe" aria-label="输入-方法-产出">
-        <div class="cell"><strong>输入</strong>文本/图/视频/点云</div>
-        <div class="arrow">→</div>
-        <div class="cell"><strong>方法</strong>检索+约束摆放</div>
-        <div class="arrow">→</div>
-        <div class="cell"><strong>产出</strong>过门禁可仿真场景</div>
+<!-- ========== 场景生成 ========== -->
+<section class="band" id="zone-scene" aria-labelledby="h-scene">
+  <div class="band-head">
+    <h2 id="h-scene">场景生成</h2>
+    <span class="weight">使用层 · 多源成景</span>
+  </div>
+  <div class="branch">
+    <h3>多源成景 · 使用层</h3>
+    <div class="sub">命题真源：propositions/多源成景.md · 等级 B→A- · 成熟度：可用（人工判断）</div>
+    <div class="pipe" aria-label="输入-方法-产出">
+      <div class="cell"><strong>输入</strong>文本/图/视频/点云</div>
+      <div class="arrow">→</div>
+      <div class="cell"><strong>方法</strong>检索+约束摆放</div>
+      <div class="arrow">→</div>
+      <div class="cell"><strong>产出</strong>过门禁可仿真场景</div>
+    </div>
+    <div class="intervene">
+      <div class="t">介入点 · 多源成景</div>
+      AffordCraft → LayoutVLM / Steerable → 门禁（SimReady FET / SimReadyBench）→ 仿真对照（X2Real 等）
+    </div>
+    <div class="etag-row" aria-label="推荐组合四标签">
+      <span class="etag mid">外部证据 · 待补</span>
+      <span class="etag on">作者/第三方复现 · 有</span>
+      <span class="etag off">本机实验 · 无记录</span>
+      <span class="etag on">工程集成 · 有</span>
+    </div>
+    <p class="hint" style="margin-top:8px">路线决策：默认栈维持（非效果测量结论）</p>
+    <div class="concept">
+      <span class="badge">概念示意 · 非本机</span>
+      <div class="flow-mini">
+        <span class="b">图+任务</span><span class="arr">→</span>
+        <span class="b">AffordCraft G</span><span class="arr">→</span>
+        <span class="b">摆放</span><span class="arr">→</span>
+        <span class="b">FET 门禁</span><span class="arr">→</span>
+        <span class="b">X2Real 对照</span>
       </div>
-      <div class="intervene">
-        <div class="t">介入点 · 多源成景</div>
-        AffordCraft → LayoutVLM / Steerable → 门禁（SimReady <abbr title="字段/验收规范族（如 SimReady FET：Settle/Inertia/Joint/Grasp 等）">FET</abbr> / SimReadyBench）→ 仿真对照（X2Real 等）
-      </div>
-      <div class="case-slot">【真实案例位 · 空】<br/>待有 gate-pass / 对照记录再填 · 勿贴假图</div>
-      <div class="forbid">禁止：伪造 % 或未跑实验成功线</div>
-      <div class="fields" aria-label="多源成景字段" style="margin-top:12px">
-        <div class="fl"><b>目标</b><span>多源输入 → 检索适配 + 约束摆放 → 过门禁的可仿真场景</span></div>
-        <div class="fl"><b>推荐技术组合</b><span>假设：AffordCraft → LayoutVLM/Steerable → 门禁；已验证：默认栈不换；SimReady 规范/工具轨补强</span></div>
-        <div class="fl"><b>最近关键证据</b><span>SimReady-Foundation / SimReadyBench / X2Real 等已并网</span></div>
-        <div class="fl"><b>未解瓶颈</b><span>AffordCraft G ↔ SimReady FET 映射；场景×资产联合协议；gate-pass slope</span></div>
-        <div class="fl"><b>下一实验</b><span>FET 映射表；成功准则：待定义</span></div>
-      </div>
+      <p class="caption">概念示意 · 自绘管线剖面 · 非本机 · 外部公开演示图待核链后另挂</p>
+    </div>
+    <h3 style="margin-top:12px;font-size:15px">待验证事项</h3>
+    <ul class="backlog">
+      <li><span class="prio">P2</span><span>AffordCraft G ↔ SimReady FET 映射表 · 成功准则待定义</span></li>
+      <li><span class="prio">—</span><span>场景×资产联合协议 · 无记录</span></li>
+      <li><span class="prio">—</span><span>gate-pass slope · 待验证</span></li>
+    </ul>
+    <div class="fields" aria-label="多源成景字段" style="margin-top:12px">
+      <div class="fl"><b>目标</b><span>多源输入 → 检索适配 + 约束摆放 → 过门禁的可仿真场景</span></div>
+      <div class="fl"><b>推荐技术组合</b><span>假设：AffordCraft → LayoutVLM/Steerable → 门禁；路线决策：默认栈维持；SimReady 规范/工具轨补强</span></div>
+      <div class="fl"><b>最近关键证据</b><span>SimReady-Foundation / SimReadyBench / X2Real 等已并网</span></div>
+      <div class="fl"><b>未解瓶颈</b><span>AffordCraft G ↔ SimReady FET 映射；场景×资产联合协议；gate-pass slope</span></div>
+      <div class="fl"><b>下一实验</b><span>FET 映射表；成功准则：待定义</span></div>
     </div>
   </div>
 </section>
 
-<!-- ========== C · 证据与下一步 ========== -->
-<section class="band band-c" id="zone-c" aria-labelledby="h-c">
+<!-- ========== 实验与证据 ========== -->
+<section class="band" id="zone-evidence" aria-labelledby="h-evidence">
   <div class="band-head">
-    <h2 id="h-c">C · 证据与下一步</h2>
-    <span class="role">强交互</span>
-    <span class="weight">证据矩阵 + 优先实验 ≤3</span>
+    <h2 id="h-evidence">实验与证据</h2>
+    <span class="weight">方法矩阵 + 优先实验 ≤3</span>
   </div>
-  <p class="hint">矩阵列对齐 maturity / evidence-grades / open-questions / cards。下一实验只突出 P1–P3；缺标待定义，不造成功线。</p>
+  <p class="hint">方法级比较 · 缺数填「无记录/待验证」· 不编造 · 四标签独立于真机列</p>
 
   <div class="c-grid">
     <div>
-      <table class="matrix" aria-label="证据矩阵">
-        <thead>
-          <tr>
-            <th>命题</th>
-            <th>成熟度（人工）</th>
-            <th>关键证据等级</th>
-            <th>开放问题</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>可拆积木</td>
-            <td>可用（人工判断·非测量值）</td>
-            <td>A- 卡若干（DISCOVERSE / AtlasGS 等）；真机 MuJoCo 已有</td>
-            <td>Isaac 对象级对照；Flats∥AtlasGS；RQS∥Inpaint360GS</td>
-          </tr>
-          <tr>
-            <td>多源成景</td>
-            <td>可用（人工判断·非测量值）</td>
-            <td>A- / 规范·工具轨（SimReady）；X2Real 场景级</td>
-            <td>FET 映射表；场景×资产协议；gate-pass slope</td>
-          </tr>
-          <tr>
-            <td>不冻栈</td>
-            <td>探索（人工判断）</td>
-            <td>技能/门禁在线（非方法真机 A）</td>
-            <td>快环漏记；慢环晋升门禁松紧</td>
-          </tr>
-          <tr>
-            <td>判官台</td>
-            <td>可用（人工判断）</td>
-            <td>采信规则在线</td>
-            <td>跨方法仿真→真机排序；失败同族量化</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="matrix-wrap">
+        <table class="matrix" aria-label="方法级证据矩阵">
+          <thead>
+            <tr>
+              <th>方法</th>
+              <th>阶段目标</th>
+              <th>输入</th>
+              <th>核心能力</th>
+              <th>作者指标</th>
+              <th>代码许可</th>
+              <th>真机</th>
+              <th>本机</th>
+              <th>限制</th>
+              <th>对应实验</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="https://github.com/Milesssssss/real2sim-research/blob/main/knowledge/cards/ObjectGS.md">ObjectGS</a></td>
+              <td>对象 densify</td>
+              <td>对象锚点</td>
+              <td>锚点 densify</td>
+              <td>LERF-Mask mIoU~88（论文·非本机）</td>
+              <td>待验证</td>
+              <td>无记录</td>
+              <td>无记录</td>
+              <td>缺协议/真机</td>
+              <td>P1 相关</td>
+            </tr>
+            <tr>
+              <td><a href="https://github.com/Milesssssss/real2sim-research/blob/main/knowledge/cards/DIGS.md">DIGS</a></td>
+              <td>边界保真</td>
+              <td>分割边界</td>
+              <td>training-free</td>
+              <td>91.71 mIoU / 86.91 mBIoU（论文·非本机）</td>
+              <td>待验证</td>
+              <td>无记录</td>
+              <td>无记录</td>
+              <td>缺真机对照</td>
+              <td>P1 相关</td>
+            </tr>
+            <tr>
+              <td><a href="https://github.com/Milesssssss/real2sim-research/blob/main/knowledge/cards/DISCOVERSE.md">DISCOVERSE</a></td>
+              <td>GS+MuJoCo 闭环</td>
+              <td>3DGS 资产</td>
+              <td>真机 ACT/DP（外部）</td>
+              <td>ACT 55%→86.5%（论文测量·非本机）</td>
+              <td>开源复现</td>
+              <td>外部有</td>
+              <td>无记录</td>
+              <td>协议字段卡面弱</td>
+              <td>对照基线</td>
+            </tr>
+            <tr>
+              <td><a href="https://github.com/Milesssssss/real2sim-research/blob/main/knowledge/cards/AtlasGS.md">AtlasGS</a></td>
+              <td>Atlanta 平面</td>
+              <td>室内扫描</td>
+              <td>平面重建</td>
+              <td>Replica F 87.35（测量·非本机）</td>
+              <td>开源复现</td>
+              <td>无记录</td>
+              <td>无记录</td>
+              <td>本机同向待做</td>
+              <td>开放问题</td>
+            </tr>
+            <tr>
+              <td><a href="https://github.com/Milesssssss/real2sim-research/blob/main/knowledge/cards/Inpaint360GS.md">Inpaint360GS</a></td>
+              <td>360° 修复</td>
+              <td>360 观察</td>
+              <td>对象修复</td>
+              <td>FID 35.93（作者·非本机）</td>
+              <td>待验证</td>
+              <td>无记录</td>
+              <td>无记录</td>
+              <td>∥RQS 分轴</td>
+              <td>开放问题</td>
+            </tr>
+            <tr>
+              <td><a href="https://github.com/Milesssssss/real2sim-research/blob/main/knowledge/cards/AffordCraft.md">AffordCraft</a></td>
+              <td>图+任务→sim-ready</td>
+              <td>图/任务</td>
+              <td>G 五元组</td>
+              <td>85.15% vs 生成≤45%（论文·非本机）</td>
+              <td>待验证</td>
+              <td>无记录</td>
+              <td>无记录</td>
+              <td>缺真机 URL</td>
+              <td>P2</td>
+            </tr>
+            <tr>
+              <td><a href="https://github.com/Milesssssss/real2sim-research/blob/main/knowledge/cards/SimReady-Foundation.md">SimReady-Foundation</a></td>
+              <td>字段级规范</td>
+              <td>资产字段</td>
+              <td>FET003</td>
+              <td>规范轨（无真机要件）</td>
+              <td>开源</td>
+              <td>不适用</td>
+              <td>无记录</td>
+              <td>规范≠真机 A</td>
+              <td>P2 映射</td>
+            </tr>
+            <tr>
+              <td><a href="https://github.com/Milesssssss/real2sim-research/blob/main/knowledge/cards/X2Real.md">X2Real</a></td>
+              <td>场景级对照</td>
+              <td>场景任务</td>
+              <td>sim↔真机相关</td>
+              <td>progress r=0.84（8 任务·非本机）</td>
+              <td>待验证</td>
+              <td>外部有</td>
+              <td>无记录</td>
+              <td>场景级非对象级</td>
+              <td>P3 相关</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <div class="grade-legend" aria-label="证据带 · 图例">
         <span class="it"><b style="color:var(--ok)">A</b> 代码+协议+真机·同族失败可查</span>
         <span class="it"><b>规范</b> 工具/字段规范·不要求真机</span>
         <span class="it"><b style="color:var(--warn)">B</b> 叙事清楚·落地部分公开·需复现</span>
         <span class="it"><b style="color:var(--gap)">C</b> 演示/二手/无基准·不建卡</span>
       </div>
-      <p class="cap">最近并网（节选）：
-        <a href="https://github.com/Milesssssss/real2sim-research/blob/main/knowledge/cards/DISCOVERSE.md">DISCOVERSE</a>（A-·开源复现）·
-        <a href="https://github.com/Milesssssss/real2sim-research/blob/main/knowledge/cards/AtlasGS.md">AtlasGS</a>（A-·外部报道/论文结论）·
-        <a href="https://github.com/Milesssssss/real2sim-research/blob/main/knowledge/cards/SimReady-Foundation.md">SimReady-Foundation</a>（A-·场景适配工程判断）
-      </p>
+      <p class="cap">四标签（外|复|本|工）与矩阵「真机」列正交 · 本机无记录不静默变绿 · 出处类型：外部公开 / 概念示意 / 本机实验</p>
     </div>
     <div>
       <ul class="slot-list" aria-label="下一实验优先项">
@@ -283,14 +451,15 @@
   </div>
 </section>
 
-<!-- ========== D · 治理（默认折叠） ========== -->
-<details class="gov band-d" id="zone-d">
-  <summary>D · Agent 治理（默认折叠 · 最低权重 · 勿与 A/B 同级抢首屏）</summary>
+<!-- ========== 研究治理 ========== -->
+<details class="gov" id="zone-gov">
+  <summary>研究治理</summary>
   <p class="hint" style="margin-top:4px">不冻栈 / 判官台 / 采矿→核链→并网。展开后才见内容。术语：
     <abbr title="递归自改进（Recursive Self-Improvement）——任务技能快环 + 元技能慢环，避免方法栈冻结">RSI</abbr> ·
     <abbr title="近胜记录——基线→结果→目标→斜率→策略指纹，用于慢环审计">stage-win</abbr> ·
     <abbr title="并网：证据卡合入看板可见带，不改变命题原意">并网</abbr>
   </p>
+  <div class="gov-mat">治理成熟度（降权移入）：RSI · 不冻栈 · <b>探索</b>；总控 · 判官台 · <b>可用</b>（人工判断·非测量值）</div>
   <div class="gov-body">
     <div class="gov-card">
       <h4>不冻栈 · RSI</h4>
@@ -321,7 +490,7 @@
 
 <footer class="site-foot">
   真源只读：<code>propositions/</code> · <code>knowledge/board-intro.md</code> · <code>knowledge/glossary.md</code> · <code>knowledge/maturity.md</code> · <code>knowledge/evidence-grades.md</code> · <code>knowledge/cards/</code>
-  · Issue #5 IA 改版 · 示意非真图 · 不合 main 直至编排核链
+  · 写作口径 <code>docs/board-authoring.md</code>
 </footer>
 
 </div>
