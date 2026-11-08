@@ -1,10 +1,10 @@
 # Steerable-Scene-Gen
 
-- **grade**: A
+- **grade**: A-
 - **layer**: landing/库资产 SE(3)
 - **prop**: use
 - **mechanism**: >44M 场景；Drake settling
-- **hard_metrics**: 代码+数据
+- **hard_metrics**: 论文 https://arxiv.org/abs/2505.04831 · Drake settling / 场景规模；缺协议与真机对照
 - **urls**: https://arxiv.org/abs/2505.04831
 - **merged**: 2026-11-08
 - **x_list_add**: no

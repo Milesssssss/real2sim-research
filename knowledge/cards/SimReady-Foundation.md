@@ -1,10 +1,11 @@
 # SimReady-Foundation
 
-- **grade**: A
+- **grade**: A-
+- **track**: 规范/工具
 - **layer**: landing/字段级规范
 - **prop**: use
 - **mechanism**: FET003 Settle / Inertia / Joint / Grasp；validate/benchmark
-- **hard_metrics**: GitHub
+- **hard_metrics**: 规范仓库 https://github.com/NVIDIA/simready-foundation · FET003 Settle/Inertia/Joint/Grasp（无真机要件）
 - **urls**: https://github.com/NVIDIA/simready-foundation
 - **merged**: 2026-11-08
 - **x_list_add**: no
