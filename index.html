@@ -4,10 +4,10 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Real-to-Sim 研究命题看板</title>
-<!-- research-board-html shadow#2+G
+<!-- research-board-html shadow#3+G
 - [x] A 保真：72/78/65/80 与命题等级/瓶颈/下一刀未改
 - [x] B 3秒扫：四卡标题+等级pill+瓶颈/阶段+下一刀行
-- [x] C 芯片化；四卡三行齐；并网单行；accent≤2 打在可拆积木 Isaac 下一刀
+- [x] C 芯片化；四卡三行齐；并网单行·色点醒/次于下一刀；accent≤2 打在可拆积木 Isaac 下一刀
 - [x] D 可筛；单文件；系统字体
 - [x] E 无 diagram
 - [x] F 待 Pages 200
@@ -42,8 +42,11 @@ main{max-width:1180px;margin:0 auto;padding:10px 14px 36px;display:grid;gap:10px
 .gr.a{color:#062416;background:var(--ok);border-color:transparent}
 .gr.am{color:#042428;background:var(--cy);border-color:transparent}
 .gr.b{color:#2a1a02;background:var(--warn);border-color:transparent}
-.rc .dotg{width:8px;height:8px;border-radius:50%;flex:0 0 auto}
+.rc .dotg{width:9px;height:9px;border-radius:50%;flex:0 0 auto;box-shadow:0 0 0 2px rgba(255,255,255,.06)}
 .rc .dotg.a{background:var(--ok)}.rc .dotg.am{background:var(--cy)}.rc .dotg.b{background:var(--warn)}
+.rc .gr{opacity:.92}
+.next.focus{color:var(--acc);font-weight:700;letter-spacing:.1px}
+.next.muted{color:var(--dim);font-weight:500}
 .props{display:grid;gap:10px;grid-template-columns:1.15fr 1.15fr .95fr .95fr;align-items:stretch}
 .prop{display:grid;grid-template-rows:auto auto 1fr auto;gap:8px;min-height:132px;position:relative;overflow:visible}
 .row1{display:flex;justify-content:space-between;align-items:center;gap:6px;min-height:28px}
@@ -74,12 +77,15 @@ details.more[open]>summary::before{content:'▾'}
 details.more>summary .n{font-variant-numeric:tabular-nums;color:var(--muted)}
 details.more .q{position:absolute;left:8px;right:8px;top:calc(100% - 2px);z-index:4;display:flex;flex-wrap:wrap;gap:4px;margin:0;padding:8px;background:var(--card);border:1px solid var(--line);border-radius:10px;box-shadow:none}
 .q .chip{white-space:normal;max-width:100%;line-height:1.3}
-.ev{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center}
-.ev .it{display:inline-flex;align-items:center;gap:5px;color:var(--muted);font-size:11px;cursor:help}
-.ev .dot{display:inline-block}
-footer{max-width:1180px;margin:0 auto;padding:0 14px 28px;color:var(--dim);font-size:11px}
-footer details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 10px}
-footer summary{cursor:pointer;color:var(--muted)}
+.ev{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;padding:5px 8px!important;opacity:.78}
+.ev .h{font-size:9.5px;letter-spacing:.5px}
+.ev .it{display:inline-flex;align-items:center;gap:4px;color:var(--dim);font-size:10.5px;cursor:help}
+.ev .it b{font-weight:700;font-size:10px}
+.ev .dot{display:inline-block;width:6px;height:6px}
+footer{max-width:1180px;margin:0 auto;padding:0 14px 22px;color:var(--dim);font-size:10.5px;opacity:.72}
+footer details{background:transparent;border:1px dashed var(--line);border-radius:8px;padding:5px 8px}
+footer summary{cursor:pointer;color:var(--dim);font-size:10.5px}
+footer details[open]{opacity:1;background:var(--card);border-style:solid}
 .fg{display:grid;gap:6px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:8px}
 .fg div{background:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 8px;color:var(--muted);font-size:11px;line-height:1.4}
 .fg b{color:var(--text)}
@@ -197,15 +203,15 @@ footer summary{cursor:pointer;color:var(--muted)}
   </section>
 
   <div class="card ev">
-    <span class="h" style="margin:0">证据等级</span>
-    <span class="it" title="A：代码+评测协议+真机对照，失败模式同族可查 → 指导选型"><span class="dot" style="background:var(--ok)"></span><b style="color:var(--ok)">A</b> 代码·协议·真机</span>
-    <span class="it" title="B：理论/叙事清楚，落地部分公开 → 可作方向，需复现"><span class="dot" style="background:var(--warn)"></span><b style="color:var(--warn)">B</b> 叙事清·部分公开</span>
-    <span class="it" title="C：演示/二手/无基准 → 默认降权，不建卡"><span class="dot" style="background:var(--bad)"></span><b style="color:var(--bad)">C</b> 演示/二手 → 不建卡</span>
+    <span class="h" style="margin:0">证据</span>
+    <span class="it" title="A：代码+评测协议+真机对照，失败模式同族可查 → 指导选型"><span class="dot" style="background:var(--ok)"></span><b style="color:var(--ok)">A</b> 真机</span>
+    <span class="it" title="B：理论/叙事清楚，落地部分公开 → 可作方向，需复现"><span class="dot" style="background:var(--warn)"></span><b style="color:var(--warn)">B</b> 部分公开</span>
+    <span class="it" title="C：演示/二手/无基准 → 默认降权，不建卡"><span class="dot" style="background:var(--bad)"></span><b style="color:var(--bad)">C</b> 不建卡</span>
   </div>
 </main>
 <footer>
   <details>
-    <summary>仓库地图 / 默认栈全量</summary>
+    <summary>仓库地图</summary>
     <div class="fg">
       <div><b>可拆积木</b><br>ObjectGS + DIGS → DISCOVERSE；Flats ∥ AtlasGS；RQS ∥ Inpaint360GS；mesh → Scalable Real2Sim</div>
       <div><b>多源成景</b><br>AffordCraft → LayoutVLM/Steerable → 门禁；G ↔ SimReady FET+Bench；Acceptance 资产/场景门禁族</div>
