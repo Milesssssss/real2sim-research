@@ -1,10 +1,10 @@
 # DISCOVERSE
 
-- **grade**: A
+- **grade**: A-
 - **layer**: landing/3DGS+MuJoCo R2S2R
 - **prop**: gen
 - **mechanism**: ACT 55%→86.5% vs SplatSim 44%→68%；DP 56%→86% vs 45.3%→74.6%；凸分解
-- **hard_metrics**: 代码+项目+真机
+- **hard_metrics**: 论文 https://arxiv.org/abs/2507.21981 · 有真机数字(ACT/DP)；协议字段卡面不可定位 → 从严 A-
 - **urls**: https://arxiv.org/abs/2507.21981
 - **merged**: 2026-11-08
 - **x_list_add**: no
