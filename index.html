@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Real-to-Sim 研究命题看板</title>
-<!-- research-board-html floor-H+G
+<!-- research-board-html floor-H+diag2+G
 - [x] A 保真：72/78/65/80 与命题等级/瓶颈/下一刀未改
 - [x] B 3秒扫：四卡标题+等级pill+瓶颈/阶段+下一刀行
 - [x] C 芯片化；四卡三行齐；并网单行·色点醒/次于下一刀；accent≤2 打在可拆积木 Isaac 下一刀
@@ -16,7 +16,8 @@
 - [x] G3
 - [x] H1 aria-pressed + landmarks + focus-visible
 - [x] H2 contrast tokens raised
-- [x] H3 color≠sole; bars; no pie/ring accent 对焦可拆积木·Isaac；多源 FET 下一刀 muted
+- [x] H3
+- [x] E two diagram islands (workflow+hook) via diagram-design color≠sole; bars; no pie/ring accent 对焦可拆积木·Isaac；多源 FET 下一刀 muted
 -->
 <style>
 :root{--bg:#090d12;--card:#111823;--ink:#0c121a;--line:#1c2836;--text:#e8eef7;--muted:#a3b7cc;--dim:#8a9fb4;--ok:#3dd68c;--warn:#f5a524;--bad:#f31260;--acc:#6ea8fe;--cy:#39d0d8}
@@ -83,6 +84,11 @@ details.more>summary .n{font-variant-numeric:tabular-nums;color:var(--muted)}
 details.more .q{position:absolute;left:8px;right:8px;top:calc(100% - 2px);z-index:4;display:flex;flex-wrap:wrap;gap:4px;margin:0;padding:8px;background:var(--card);border:1px solid var(--line);border-radius:10px;box-shadow:none}
 .q .chip{white-space:normal;max-width:100%;line-height:1.3}
 .ev{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;padding:5px 8px!important}
+.diagram{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px 10px 6px}
+.diagram .h{margin:0 0 4px}
+.diagram svg{display:block;width:100%;height:auto;max-height:120px}
+.diagram .cap{margin:2px 0 0;color:var(--dim);font-size:10px}
+
 .ev .h{font-size:9.5px;letter-spacing:.5px}
 .ev .it{display:inline-flex;align-items:center;gap:4px;color:var(--muted);font-size:10.5px;cursor:help}
 .ev .it b{font-weight:700;font-size:10px}
@@ -133,6 +139,54 @@ footer details[open]{opacity:1;background:var(--card);border-style:solid}
         <span class="rc" data-p="多源成景"><span class="dotg b"></span><b>3DAlign-DAER</b><span class="gr b">B</span></span>
       </div>
     </div>
+  </section>
+
+
+  <section class="diagram" aria-label="工作流闭环图">
+    <div class="h">工作流闭环</div>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 96" role="img" aria-labelledby="wf-t wf-d">
+      <title id="wf-t">工作流闭环</title>
+      <desc id="wf-d">命题到开放问题的主链，核链虚线复核回诊断，开放问题虚线再诊断回诊断。</desc>
+      <defs>
+        <marker id="aw" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#8a9fb4"/></marker>
+        <marker id="aw-acc" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6ea8fe"/></marker>
+      </defs>
+      <!-- nodes y=16 h=28 rx=8 · 4px grid -->
+      <g font-family="ui-sans-serif,system-ui,sans-serif" font-size="11" text-anchor="middle">
+        <rect x="16" y="16" width="88" height="28" rx="8" fill="#0c121a" stroke="#1c2836"/>
+        <text x="60" y="34" fill="#e8eef7">命题</text>
+        <rect x="152" y="16" width="88" height="28" rx="8" fill="rgba(110,168,254,.14)" stroke="#6ea8fe"/>
+        <text x="196" y="34" fill="#e8eef7" font-weight="700">诊断</text>
+        <rect x="288" y="16" width="88" height="28" rx="8" fill="#0c121a" stroke="#1c2836"/>
+        <text x="332" y="34" fill="#e8eef7">B卡</text>
+        <rect x="424" y="16" width="88" height="28" rx="8" fill="#0c121a" stroke="#1c2836"/>
+        <text x="468" y="34" fill="#e8eef7">采矿</text>
+        <rect x="560" y="16" width="88" height="28" rx="8" fill="#0c121a" stroke="#1c2836"/>
+        <text x="604" y="34" fill="#e8eef7">核链</text>
+        <rect x="696" y="16" width="88" height="28" rx="8" fill="rgba(110,168,254,.14)" stroke="#6ea8fe"/>
+        <text x="740" y="34" fill="#e8eef7" font-weight="700">并网</text>
+        <rect x="832" y="16" width="112" height="28" rx="8" fill="#0c121a" stroke="#1c2836"/>
+        <text x="888" y="34" fill="#e8eef7">开放问题</text>
+      </g>
+      <!-- forward edges -->
+      <g fill="none" stroke="#8a9fb4" stroke-width="1.5" marker-end="url(#aw)">
+        <path d="M104 30H152"/>
+        <path d="M240 30H288"/>
+        <path d="M376 30H424"/>
+        <path d="M512 30H560"/>
+        <path d="M648 30H696"/>
+        <path d="M784 30H832"/>
+      </g>
+      <!-- dashed feedback: 核链→诊断 复核；开放问题→诊断 再诊断 -->
+      <g fill="none" stroke="#6ea8fe" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#aw-acc)">
+        <path d="M604 44V68H196V44"/>
+        <path d="M888 44V80H196V44"/>
+      </g>
+      <g font-family="ui-sans-serif,system-ui,sans-serif" font-size="10" fill="#6ea8fe">
+        <text x="400" y="64">复核</text>
+        <text x="520" y="90">再诊断</text>
+      </g>
+    </svg>
   </section>
 
   <section class="props" id="board">
@@ -205,6 +259,40 @@ footer details[open]{opacity:1;background:var(--card);border-style:solid}
         <span class="chip">诊断协议产品化</span>
       </div></details>
     </article>
+  </section>
+
+
+  <section class="diagram" aria-label="生成与使用挂钩图">
+    <div class="h">生成 ↔ 使用挂钩</div>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 72" role="img" aria-labelledby="hk-t hk-d">
+      <title id="hk-t">生成与使用挂钩</title>
+      <desc id="hk-d">对象级高斯到导出、资产库、约束摆放，再到 Acceptance 门禁。</desc>
+      <defs>
+        <marker id="aw2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#8a9fb4"/></marker>
+      </defs>
+      <g font-family="ui-sans-serif,system-ui,sans-serif" font-size="11" text-anchor="middle">
+        <rect x="40" y="20" width="140" height="28" rx="8" fill="#0c121a" stroke="#1c2836"/>
+        <text x="110" y="38" fill="#e8eef7">对象级 GS</text>
+        <rect x="236" y="20" width="100" height="28" rx="8" fill="#0c121a" stroke="#1c2836"/>
+        <text x="286" y="38" fill="#e8eef7">导出</text>
+        <rect x="392" y="20" width="120" height="28" rx="8" fill="rgba(110,168,254,.14)" stroke="#6ea8fe"/>
+        <text x="452" y="38" fill="#e8eef7" font-weight="700">资产库</text>
+        <rect x="568" y="20" width="120" height="28" rx="8" fill="#0c121a" stroke="#1c2836"/>
+        <text x="628" y="38" fill="#e8eef7">约束摆放</text>
+        <rect x="744" y="20" width="140" height="28" rx="8" fill="rgba(110,168,254,.14)" stroke="#6ea8fe"/>
+        <text x="814" y="38" fill="#e8eef7" font-weight="700">Acceptance</text>
+      </g>
+      <g fill="none" stroke="#8a9fb4" stroke-width="1.5" marker-end="url(#aw2)">
+        <path d="M180 34H236"/>
+        <path d="M336 34H392"/>
+        <path d="M512 34H568"/>
+        <path d="M688 34H744"/>
+      </g>
+      <g font-family="ui-sans-serif,system-ui,sans-serif" font-size="10" fill="#8a9fb4">
+        <text x="110" y="64" text-anchor="middle">生成</text>
+        <text x="628" y="64" text-anchor="middle">使用</text>
+      </g>
+    </svg>
   </section>
 
   <div class="card ev">
