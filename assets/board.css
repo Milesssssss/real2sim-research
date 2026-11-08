@@ -438,6 +438,26 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,.55); }
   margin-top: 6px;
 }
 .concept svg { width: 100%; height: auto; display: block; }
+.concept img,
+.concept object,
+.concept-slot img,
+.concept-slot object {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.concept-slot {
+  margin: 0 0 12px;
+}
+.concept-slot figcaption.caption {
+  margin: 6px 0 0;
+}
+/* PR#10 paste: concept slots stay visible at phone; .svg-frame hide is desktop swimlane only */
+@media (max-width: 980px) {
+  .concept-slot { display: block; }
+  .concept-slot img { max-width: 100%; height: auto; }
+}
 .flow-mini {
   display: flex;
   flex-wrap: wrap;
@@ -471,7 +491,9 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,.55); }
   grid-template-columns: 1.55fr 1fr;
   gap: 14px;
 }
-.matrix-wrap { overflow-x: auto; }
+/* contain matrix min-width so 390 has no whole-page horizontal scroll (TC3) */
+.c-grid > * { min-width: 0; max-width: 100%; }
+.matrix-wrap { overflow-x: auto; max-width: 100%; }
 table.matrix {
   width: 100%;
   border-collapse: collapse;
@@ -579,6 +601,8 @@ footer.site-foot code { font-size: 11px; }
   .chain-wrap, .branches, .c-grid, .gov-body, .hero {
     grid-template-columns: 1fr;
   }
+  .c-grid > *, .band, .wrap { max-width: 100%; }
+  .matrix-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
   .site-header h1 { font-size: 26px; }
   .pipe { grid-template-columns: 1fr; }
   .pipe .arrow { display: none; }
