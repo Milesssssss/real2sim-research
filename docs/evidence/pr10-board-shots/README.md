@@ -20,4 +20,4 @@
 
 补充特写（可选）：`pr10-board-1440-pipeline-slot.png` · `pr10-board-390-simready-slot.png`
 
-head SHA：`1aa18e9d1048a3336fd1f78025cfc251dc4bb789`
+head SHA：`73ab0f54e4c999df4a413a15e0576d7663fb95d7`
