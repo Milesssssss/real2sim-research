@@ -102,6 +102,12 @@ footer details[open]{opacity:1;background:var(--card);border-style:solid}
 .hidden{display:none!important}
 @media(max-width:980px){.props{grid-template-columns:1fr 1fr}.top{grid-template-columns:1fr}}
 @media(max-width:560px){.props{grid-template-columns:1fr}}
+
+.intro{padding:7px 14px;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center}
+.intro p{margin:0;color:var(--muted);font-size:11.5px;line-height:1.45;flex:1 1 320px}
+.intro .tags{display:inline-flex;gap:5px;flex-wrap:wrap}
+.rc a{color:inherit;text-decoration:none}
+.rc a:hover{color:var(--text);text-decoration:underline}
 </style>
 </head>
 <body>
@@ -109,6 +115,10 @@ footer details[open]{opacity:1;background:var(--card);border-style:solid}
   <h1>Real-to-Sim 研究命题看板</h1>
   <div class="meta"><a href="https://github.com/Milesssssss/real2sim-research">真源仓库</a><span>只看不决策</span><span>2026-11-08 Asia/Shanghai</span></div>
 </header>
+<section class="intro" aria-label="看板导读">
+  <p>用可复核证据，把 Real→Sim→Real 的生成与使用瓶颈拆成可实验命题。 · <a href="https://github.com/Milesssssss/real2sim-research/blob/main/knowledge/board-intro.md">导读</a></p>
+  <span class="tags"><span class="chip">技术研究</span><span class="chip">Agent 运行治理</span></span>
+</section>
 <nav aria-label="命题筛选">
   <button type="button" class="active" data-f="all" aria-pressed="true">全部</button>
   <button type="button" data-f="可拆积木" aria-pressed="false">可拆积木</button>
@@ -123,7 +133,7 @@ footer details[open]{opacity:1;background:var(--card);border-style:solid}
       <div class="mats" role="group" aria-label="四命题成熟度（定性·人工判断·非测量值）">
         <div class="mat"><span>生成</span><b title="2026-11-08 · MuJoCo 真机链已补；Isaac 对象级仍薄 · 人工判断">可用</b></div>
         <div class="mat"><span>使用</span><b title="2026-11-08 · 默认栈不换；SimReady 门禁补强中 · 人工判断">可用</b></div>
-        <div class="mat"><span>RSI</span><b title="2026-11-08 · 方法论+skill 在线；慢环审计刚起步 · 人工判断">探索</b></div>
+        <div class="mat"><span title="RSI：递归自改进——任务技能快环+元技能慢环，避免方法栈冻结">RSI</span><b title="2026-11-08 · 方法论+skill 在线；慢环审计刚起步 · 人工判断">探索</b></div>
         <div class="mat"><span>总控</span><b title="2026-11-08 · 采信规则在线；开放问题驱动采矿 · 人工判断">可用</b></div>
       </div>
       <p class="cap" style="margin:4px 0 0;font-size:10px;color:var(--dim)">成熟度·人工判断·非测量值 · 真源 knowledge/maturity.md</p>
@@ -131,12 +141,12 @@ footer details[open]{opacity:1;background:var(--card);border-style:solid}
     <div class="card">
       <div class="h">证据带 · 最近并网 · 2026-11-08</div>
       <div class="rec">
-        <span class="rc" data-p="可拆积木"><span class="dotg a"></span><b>DISCOVERSE</b><span class="gr a">A</span></span>
-        <span class="rc" data-p="可拆积木"><span class="dotg am"></span><b>AtlasGS</b><span class="gr am">A-</span></span>
-        <span class="rc" data-p="可拆积木"><span class="dotg b"></span><b>Inpaint360GS</b><span class="gr b">B</span></span>
-        <span class="rc" data-p="多源成景"><span class="dotg a"></span><b>SimReady</b><span class="gr a">A</span></span>
-        <span class="rc" data-p="多源成景"><span class="dotg am"></span><b>X2Real</b><span class="gr am">A-</span></span>
-        <span class="rc" data-p="多源成景"><span class="dotg b"></span><b>3DAlign-DAER</b><span class="gr b">B</span></span>
+        <span class="rc" data-p="可拆积木"><span class="dotg am"></span><a href="https://github.com/Milesssssss/real2sim-research/blob/main/knowledge/cards/DISCOVERSE.md"><b>DISCOVERSE</b></a><span class="gr am">A-</span></span>
+        <span class="rc" data-p="可拆积木"><span class="dotg am"></span><a href="https://github.com/Milesssssss/real2sim-research/blob/main/knowledge/cards/AtlasGS.md"><b>AtlasGS</b></a><span class="gr am">A-</span></span>
+        <span class="rc" data-p="可拆积木"><span class="dotg b"></span><a href="https://github.com/Milesssssss/real2sim-research/blob/main/knowledge/cards/Inpaint360GS.md"><b>Inpaint360GS</b></a><span class="gr b">B</span></span>
+        <span class="rc" data-p="多源成景"><span class="dotg am"></span><a href="https://github.com/Milesssssss/real2sim-research/blob/main/knowledge/cards/SimReady-Foundation.md"><b>SimReady</b></a><span class="gr am">A-</span></span>
+        <span class="rc" data-p="多源成景"><span class="dotg am"></span><a href="https://github.com/Milesssssss/real2sim-research/blob/main/knowledge/cards/X2Real.md"><b>X2Real</b></a><span class="gr am">A-</span></span>
+        <span class="rc" data-p="多源成景"><span class="dotg b"></span><a href="https://github.com/Milesssssss/real2sim-research/blob/main/knowledge/cards/3DAlign-DAER.md"><b>3DAlign-DAER</b></a><span class="gr b">B</span></span>
       </div>
     </div>
   </section>
