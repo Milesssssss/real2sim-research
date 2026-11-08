@@ -1,231 +1,189 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Real-to-Sim 研究命题看板</title>
 <style>
-:root{--bg:#0a0e13;--card:#111823;--card2:#0d141d;--line:#1d2836;--line2:#16202c;--text:#e6eef7;--muted:#8ba1b6;--dim:#65798d;--ok:#3dd68c;--warn:#f5a524;--bad:#f31260;--acc:#6ea8fe;--cy:#39d0d8}
-*{box-sizing:border-box}
-html,body{margin:0}
-body{background:var(--bg);color:var(--text);font:13px/1.45 ui-sans-serif,system-ui,-apple-system,"Segoe UI","Noto Sans SC","PingFang SC",sans-serif;-webkit-font-smoothing:antialiased}
+:root{--bg:#090d12;--card:#111823;--ink:#0c121a;--line:#1c2836;--text:#e8eef7;--muted:#8aa0b5;--dim:#5f7388;--ok:#3dd68c;--warn:#f5a524;--bad:#f31260;--acc:#6ea8fe;--cy:#39d0d8}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--bg);color:var(--text);font:12.5px/1.4 ui-sans-serif,system-ui,-apple-system,"Segoe UI","PingFang SC","Noto Sans SC",sans-serif}
 a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
-code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11.5px;background:#0a1018;border:1px solid var(--line2);padding:0 4px;border-radius:4px;color:#b9cbe0}
-header{padding:9px 14px 8px;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline}
-header h1{margin:0;font-size:15px;letter-spacing:.2px}
-.hsub{font-size:11.5px;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 9px;align-items:center}
-nav{display:flex;gap:6px;flex-wrap:wrap;padding:7px 14px;position:sticky;top:0;z-index:9;background:rgba(10,14,19,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-nav button{background:var(--card2);border:1px solid var(--line);color:var(--text);border-radius:999px;padding:3px 11px;font-size:12px;cursor:pointer;font-family:inherit;transition:.15s}
-nav button:hover{border-color:#2b3d52}
-nav button.active{background:var(--acc);color:#06121f;border-color:transparent;font-weight:700}
-main{padding:10px 14px 36px;display:grid;gap:10px;max-width:1280px;margin:0 auto}
-.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 11px}
-h2{margin:0 0 6px;font-size:11.5px;color:var(--muted);font-weight:700;letter-spacing:.6px}
-.top{display:grid;gap:10px;grid-template-columns:minmax(0,.85fr) minmax(0,1.4fr)}
-.mats{display:grid;gap:4px}
-.mat{display:grid;grid-template-columns:32px 24px 1fr;align-items:center;gap:6px;font-size:11.5px;color:var(--muted)}
-.mat b{color:var(--text);font-size:12px;font-variant-numeric:tabular-nums}
-.mat i{display:block;height:4px;border-radius:3px;background:#16202c;position:relative}
-.mat i::after{content:"";position:absolute;inset:0;width:var(--v);border-radius:3px;background:linear-gradient(90deg,var(--acc),var(--cy))}
-.rec{display:grid;gap:5px;grid-template-columns:repeat(auto-fit,minmax(138px,1fr))}
-.rc{background:var(--card2);border:1px solid var(--line2);border-radius:8px;padding:4px 7px;font-size:11px;line-height:1.35}
-.rc b{font-size:11.5px;font-weight:700}
-.rc p{margin:1px 0 0;color:var(--muted)}
-.gr{display:inline-block;font-size:9.5px;font-weight:800;padding:0 4px;border-radius:4px;border:1px solid;margin-left:4px;vertical-align:1px}
-.gr.a{color:var(--ok);border-color:rgba(61,214,140,.45);background:rgba(61,214,140,.1)}
-.gr.am{color:var(--cy);border-color:rgba(57,208,216,.45);background:rgba(57,208,216,.1)}
-.gr.b{color:var(--warn);border-color:rgba(245,165,36,.45);background:rgba(245,165,36,.1)}
-.tblwrap{overflow-x:auto;padding:4px 8px}
-table{width:100%;border-collapse:collapse;font-size:12.5px}
-th,td{text-align:left;padding:4px 7px;border-bottom:1px solid var(--line2);vertical-align:middle}
-th{font-size:10.5px;color:var(--dim);font-weight:600;letter-spacing:.4px;white-space:nowrap}
-tbody tr:last-child td{border-bottom:0}
-td b{font-size:12.5px}
-td small{color:var(--dim);font-size:10.5px;margin-left:4px}
-.chip{display:inline-block;font-size:10.5px;padding:1px 6px;border-radius:6px;background:var(--card2);border:1px solid var(--line);color:#a9c0d6;margin:1px 3px 1px 0;white-space:nowrap}
-.lv{font-weight:700;font-size:11.5px;white-space:nowrap}
-.lv.up{color:var(--ok)}
-.lv.run{color:var(--warn)}
-.lv.auth{color:var(--acc)}
-.dim{color:var(--dim)}
-.col4{font-size:11px;color:var(--dim);line-height:1.35}
-.oqs{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(215px,1fr))}
-.oq h2{color:var(--cy);margin-bottom:5px}
-.chips{list-style:none;margin:0;padding:0}
-.chips li{font-size:11.5px;background:var(--card2);border:1px solid var(--line2);border-radius:6px;padding:3px 7px;margin-bottom:4px;color:#c5d5e6;line-height:1.35}
-details{margin-top:5px}
-summary{cursor:pointer;font-size:11px;color:var(--acc);outline:none}
-summary::marker{color:var(--dim)}
-details .chips{margin-top:5px}
-.evrow{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:11.5px;color:var(--muted);align-items:center}
-.evrow span.it{white-space:nowrap}
-footer{border-top:1px solid var(--line);padding:10px 14px 26px;font-size:11.5px;color:var(--dim)}
-.fgrid{display:grid;gap:6px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));margin:7px 0}
-.fgrid div{background:var(--card2);border:1px solid var(--line2);border-radius:8px;padding:6px 8px;font-size:11px;line-height:1.4;color:var(--muted)}
-.fgrid b{color:var(--text)}
-@media(max-width:660px){.top{grid-template-columns:1fr}.col4{display:none}header h1{font-size:14px}}
+code{font:11px ui-monospace,Menlo,Consolas,monospace;background:var(--ink);padding:0 4px;border-radius:3px;border:1px solid var(--line)}
+header{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline;padding:8px 14px;border-bottom:1px solid var(--line)}
+header h1{margin:0;font-size:14.5px} .meta{color:var(--muted);font-size:11px;display:flex;gap:8px;flex-wrap:wrap}
+nav{position:sticky;top:0;z-index:5;display:flex;gap:6px;flex-wrap:wrap;padding:7px 14px;background:rgba(9,13,18,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav button{border:1px solid var(--line);background:var(--ink);color:var(--text);border-radius:999px;padding:3px 11px;font:12px inherit;cursor:pointer}
+nav button.active{background:var(--acc);color:#061018;border-color:transparent;font-weight:700}
+main{max-width:1180px;margin:0 auto;padding:10px 14px 40px;display:grid;gap:10px}
+.bento{display:grid;gap:10px;grid-template-columns:minmax(200px,.7fr) minmax(0,1.5fr);align-items:stretch}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:9px 11px;min-height:0}
+.h{margin:0 0 6px;font-size:10.5px;letter-spacing:.7px;color:var(--muted);font-weight:700;text-transform:uppercase}
+.mats{display:grid;gap:5px}
+.mat{display:grid;grid-template-columns:34px 26px 1fr;gap:6px;align-items:center;color:var(--muted);font-size:11px}
+.mat b{color:var(--text);font-variant-numeric:tabular-nums}
+.bar{height:5px;border-radius:99px;background:var(--ink);overflow:hidden}
+.bar>i{display:block;height:100%;background:linear-gradient(90deg,var(--acc),var(--cy))}
+.rec{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:6px}
+.rc{background:var(--ink);border:1px solid var(--line);border-radius:8px;padding:5px 7px;min-height:54px}
+.rc b{display:block;font-size:11.5px}
+.rc span.note{display:block;color:var(--muted);font-size:10.5px;margin-top:2px;line-height:1.3}
+.pill{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:700;padding:1px 7px;border-radius:999px;border:1px solid;white-space:nowrap}
+.dot{width:7px;height:7px;border-radius:50%;display:inline-block}
+.pill.up{color:var(--ok);border-color:rgba(61,214,140,.4);background:rgba(61,214,140,.1)}
+.pill.up .dot{background:var(--ok)}
+.pill.run{color:var(--warn);border-color:rgba(245,165,36,.4);background:rgba(245,165,36,.1)}
+.pill.run .dot{background:var(--warn)}
+.pill.auth{color:var(--acc);border-color:rgba(110,168,254,.45);background:rgba(110,168,254,.12)}
+.pill.auth .dot{background:var(--acc)}
+.gr{display:inline-block;font-size:9.5px;font-weight:800;padding:0 4px;border-radius:4px;border:1px solid;margin-left:3px;vertical-align:1px}
+.gr.a{color:var(--ok);border-color:rgba(61,214,140,.45)}
+.gr.am{color:var(--cy);border-color:rgba(57,208,216,.45)}
+.gr.b{color:var(--warn);border-color:rgba(245,165,36,.45)}
+.props{display:grid;gap:10px;grid-template-columns:repeat(4,minmax(0,1fr));align-items:stretch}
+.prop{display:flex;flex-direction:column;gap:6px;min-height:168px}
+.prop .title{display:flex;justify-content:space-between;align-items:center;gap:6px}
+.prop h3{margin:0;font-size:13px}
+.prop .layer{color:var(--dim);font-size:10.5px}
+.chips{display:flex;flex-wrap:wrap;gap:4px}
+.chip{font-size:10.5px;padding:2px 7px;border-radius:6px;background:var(--ink);border:1px solid var(--line);color:#b7c9db;white-space:nowrap;cursor:default}
+.next{color:var(--muted);font-size:11px;line-height:1.35;margin-top:auto}
+.q{display:flex;flex-direction:column;gap:4px}
+.q .chip{white-space:normal;line-height:1.3}
+details.more{margin-top:2px}
+details.more summary{cursor:pointer;color:var(--acc);font-size:11px;list-style:none}
+details.more summary::-webkit-details-marker{display:none}
+.ev{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center}
+.ev .it{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:11.5px;cursor:help}
+footer{max-width:1180px;margin:0 auto;padding:0 14px 28px;color:var(--dim);font-size:11px}
+footer details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 10px}
+footer summary{cursor:pointer;color:var(--acc)}
+.fg{display:grid;gap:6px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:8px}
+.fg div{background:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 8px;color:var(--muted);font-size:11px;line-height:1.4}
+.fg b{color:var(--text)}
+@media(max-width:980px){.props{grid-template-columns:repeat(2,minmax(0,1fr))}.bento{grid-template-columns:1fr}}
+@media(max-width:560px){.props{grid-template-columns:1fr}}
+.hidden{display:none!important}
 </style>
 </head>
 <body>
-
 <header>
   <h1>Real-to-Sim 研究命题看板</h1>
-  <div class="hsub">
-    <a href="https://github.com/Milesssssss/real2sim-research">github.com/Milesssssss/real2sim-research</a>
-    <span>只看不决策</span>
-    <span>修订 2026-11-08 Asia/Shanghai</span>
-  </div>
+  <div class="meta"><a href="https://github.com/Milesssssss/real2sim-research">真源仓库</a><span>只看不决策</span><span>2026-11-08 Asia/Shanghai</span></div>
 </header>
-
-<nav>
-  <button data-f="all" class="active">全部</button>
+<nav id="filters">
+  <button class="active" data-f="all">全部</button>
   <button data-f="可拆积木">可拆积木</button>
   <button data-f="多源成景">多源成景</button>
   <button data-f="不冻栈">不冻栈</button>
   <button data-f="判官台">判官台</button>
 </nav>
-
 <main>
-
-  <section class="top">
+  <section class="bento">
     <div class="card">
-      <h2>成熟度</h2>
+      <div class="h">成熟度</div>
       <div class="mats">
-        <div class="mat"><span>生成</span><b>72</b><i style="--v:72%"></i></div>
-        <div class="mat"><span>使用</span><b>78</b><i style="--v:78%"></i></div>
-        <div class="mat"><span>RSI</span><b>65</b><i style="--v:65%"></i></div>
-        <div class="mat"><span>总控</span><b>80</b><i style="--v:80%"></i></div>
+        <div class="mat"><span>生成</span><b>72</b><div class="bar"><i style="width:72%"></i></div></div>
+        <div class="mat"><span>使用</span><b>78</b><div class="bar"><i style="width:78%"></i></div></div>
+        <div class="mat"><span>RSI</span><b>65</b><div class="bar"><i style="width:65%"></i></div></div>
+        <div class="mat"><span>总控</span><b>80</b><div class="bar"><i style="width:80%"></i></div></div>
       </div>
     </div>
     <div class="card">
-      <h2>最近并网 · 2026-11-08 维护采矿</h2>
+      <div class="h">最近并网 · 2026-11-08</div>
       <div class="rec">
-        <div class="rc" data-p="可拆积木"><b>DISCOVERSE</b><span class="gr a">A</span><p>ACT 55→86.5% / DP 56→86% · MuJoCo 真机</p></div>
-        <div class="rc" data-p="可拆积木"><b>AtlasGS</b><span class="gr am">A-</span><p>Replica F 87.35 / ScanNet F 77.98</p></div>
-        <div class="rc" data-p="可拆积木"><b>Inpaint360GS</b><span class="gr b">B</span><p>FID 35.93 · ∥RQS</p></div>
-        <div class="rc" data-p="多源成景"><b>SimReady Foundation</b><span class="gr a">A</span><p>补强字段，不换栈</p></div>
-        <div class="rc" data-p="多源成景"><b>SimReadyBench</b><span class="gr a">A</span><p>资产级 Acceptance</p></div>
-        <div class="rc" data-p="多源成景"><b>X2Real</b><span class="gr am">A-</span><p>r=0.84 / 0.74</p></div>
-        <div class="rc" data-p="多源成景"><b>3DAlign-DAER</b><span class="gr b">B</span><p>召回单点，slope 仍缺</p></div>
+        <div class="rc" data-p="可拆积木"><b>DISCOVERSE <span class="gr a">A</span></b><span class="note">ACT 55→86.5% · MuJoCo</span></div>
+        <div class="rc" data-p="可拆积木"><b>AtlasGS <span class="gr am">A-</span></b><span class="note">Replica F 87.35</span></div>
+        <div class="rc" data-p="可拆积木"><b>Inpaint360GS <span class="gr b">B</span></b><span class="note">FID 35.93 · ∥RQS</span></div>
+        <div class="rc" data-p="多源成景"><b>SimReady <span class="gr a">A</span></b><span class="note">Foundation · Bench</span></div>
+        <div class="rc" data-p="多源成景"><b>X2Real <span class="gr am">A-</span></b><span class="note">r=0.84 / 0.74</span></div>
+        <div class="rc" data-p="多源成景"><b>3DAlign-DAER <span class="gr b">B</span></b><span class="note">召回单点 · slope 缺</span></div>
       </div>
     </div>
   </section>
 
-  <div class="card tblwrap">
-    <table>
-      <thead>
-        <tr><th>命题</th><th>等级</th><th>默认栈</th><th class="col4">下一刀 / 状态</th></tr>
-      </thead>
-      <tbody>
-        <tr data-p="可拆积木" title="ObjectGS + DIGS → DISCOVERSE（MuJoCo 真机）；平面：3D Gaussian Flats ∥ AtlasGS；删除评测：Remove360 RQS ∥ Inpaint360GS（分轴，勿互相替代）；导出：mesh → Scalable Real2Sim（凸碰撞+惯量）">
-          <td><b>可拆积木</b><small>生成层</small></td>
-          <td><span class="lv up">B→A-</span></td>
-          <td><span class="chip">ObjectGS+DIGS</span><span class="chip">DISCOVERSE</span><span class="chip">Flats∥AtlasGS</span></td>
-          <td class="col4">Isaac 真机对照；平面/删除分轴 checklist</td>
-        </tr>
-        <tr data-p="多源成景" title="AffordCraft → LayoutVLM / Steerable → 门禁；AffordCraft G ↔ 对标 SimReady FET + SimReadyBench（补强字段，不换栈）；Acceptance 资产级 SimReadyBench / 场景级 SimFoundry ↔ YUBI ↔ Measuring ↔ X2Real(r=0.84) ↔ R2S-Eval">
-          <td><b>多源成景</b><small>使用层</small></td>
-          <td><span class="lv up">B→A-</span></td>
-          <td><span class="chip">AffordCraft</span><span class="chip">LayoutVLM/Steerable</span><span class="chip">门禁·SimReady</span></td>
-          <td class="col4">FET 映射表；单一协议；库→gate slope</td>
-        </tr>
-        <tr data-p="不冻栈" title="task-skill 快环 + meta-skill 慢环 · stage-win 门禁 · Page/memory/本库 晋升；已采纳 dashboard-sync · proposition-mine-return · specialist-harness · knowledge-brain-rsi · stage-win-card · real2sim-diagnose">
-          <td><b>不冻栈</b><small>RSI</small></td>
-          <td><span class="lv run">运行中</span></td>
-          <td><span class="chip">task-skill 快环</span><span class="chip">meta-skill 慢环</span><span class="chip">stage-win 门禁</span></td>
-          <td class="col4">周一 10:00 达摩慢环轻审计（≤3 提案）</td>
-        </tr>
-        <tr data-p="判官台" title="第一性原理三问 → 六步诊断 → A/B/C 采信 → 知识网络 + 本库；真源 Page 523c7b67-5cc4-494c-a790-8b67b56faad0 · knowledge/ + knowledge/cards/">
-          <td><b>判官台</b><small>判断系统</small></td>
-          <td><span class="lv auth">权威</span></td>
-          <td><span class="chip">第一性原理三问</span><span class="chip">六步诊断</span><span class="chip">A/B/C 采信</span></td>
-          <td class="col4">开放问题驱动下一采矿窗；仿真→真机排序对照表</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <section class="props" id="board">
+    <article class="card prop" data-p="可拆积木">
+      <div class="title"><div><h3>可拆积木</h3><div class="layer">生成层</div></div><span class="pill up" title="等级 B→A-"><span class="dot"></span>B→A-</span></div>
+      <div class="chips" title="ObjectGS + DIGS → DISCOVERSE（MuJoCo）；Flats ∥ AtlasGS；Remove360 RQS ∥ Inpaint360GS；mesh → Scalable Real2Sim">
+        <span class="chip">ObjectGS+DIGS</span><span class="chip">DISCOVERSE</span><span class="chip">Flats∥AtlasGS</span>
+      </div>
+      <div class="q">
+        <span class="chip">Isaac 对象级真机对照仍缺</span>
+        <span class="chip">Flats∥AtlasGS 本机对照</span>
+        <span class="chip">RQS∥Inpaint360GS 分轴 checklist</span>
+      </div>
+      <div class="next">下一刀：Isaac 对象级真机；平面/删除分轴 checklist</div>
+    </article>
 
-  <section class="oqs">
-    <article class="card oq" data-p="可拆积木">
-      <h2>可拆积木 · 开放问题</h2>
-      <ul class="chips">
-        <li>Isaac 对象级可组合真机对照仍缺</li>
-        <li>Flats∥AtlasGS 本机同向降残影/升 F？</li>
-        <li>RQS∥Inpaint360GS 分轴写进 checklist</li>
-      </ul>
+    <article class="card prop" data-p="多源成景">
+      <div class="title"><div><h3>多源成景</h3><div class="layer">使用层</div></div><span class="pill up" title="等级 B→A-"><span class="dot"></span>B→A-</span></div>
+      <div class="chips" title="AffordCraft → LayoutVLM / Steerable → 门禁；G ↔ SimReady FET + Bench；Acceptance：SimReadyBench / SimFoundry↔YUBI↔Measuring↔X2Real↔R2S-Eval">
+        <span class="chip">AffordCraft</span><span class="chip">Layout/Steerable</span><span class="chip">门禁·SimReady</span>
+      </div>
+      <div class="q">
+        <span class="chip">AffordCraft G ↔ SimReady FET 映射表</span>
+        <span class="chip">场景×资产单一联合协议</span>
+        <span class="chip">库规模→gate-pass slope</span>
+      </div>
+      <div class="next">下一刀：FET 映射；单一协议；库→gate slope</div>
     </article>
-    <article class="card oq" data-p="多源成景">
-      <h2>多源成景 · 开放问题</h2>
-      <ul class="chips">
-        <li>AffordCraft G ↔ SimReady FET 映射表</li>
-        <li>场景×资产单一联合协议仍缺</li>
-        <li>库规模→gate-pass slope（DAER 仅单点）</li>
-      </ul>
+
+    <article class="card prop" data-p="不冻栈">
+      <div class="title"><div><h3>不冻栈</h3><div class="layer">RSI</div></div><span class="pill run" title="状态：运行中"><span class="dot"></span>运行中</span></div>
+      <div class="chips" title="task-skill 快环 + meta-skill 慢环 · stage-win 门禁 · Page/memory/本库 晋升">
+        <span class="chip">task-skill 快环</span><span class="chip">meta 慢环</span><span class="chip">stage-win</span>
+      </div>
+      <div class="q">
+        <span class="chip">快环技能化漏记检查</span>
+        <span class="chip">慢环晋升门禁过严/过松</span>
+      </div>
+      <div class="next">下一刀：周一 10:00 达摩慢环轻审计（≤3 提案）</div>
     </article>
-    <article class="card oq" data-p="不冻栈">
-      <h2>不冻栈 · 开放问题</h2>
-      <ul class="chips">
-        <li>快环技能化漏记检查</li>
-        <li>慢环晋升门禁过严/过松</li>
-      </ul>
-    </article>
-    <article class="card oq" data-p="判官台">
-      <h2>判官台 · 开放问题</h2>
-      <ul class="chips">
-        <li>接触/可变形体失败模式同族如何量化</li>
-        <li>仿真→真机排序可预测性对照表仍薄</li>
-        <li>Scene-acceptance 一般规则（YUBI 近达标）</li>
-      </ul>
-      <details>
-        <summary>更多</summary>
-        <ul class="chips">
-          <li>资产互操作（GSDF 等）是否收敛</li>
-          <li>统一 Real2Sim 基准与公开测试集清单</li>
-          <li>诊断协议产品化：一键实验单</li>
-        </ul>
-      </details>
+
+    <article class="card prop" data-p="判官台">
+      <div class="title"><div><h3>判官台</h3><div class="layer">总控</div></div><span class="pill auth" title="状态：权威"><span class="dot"></span>权威</span></div>
+      <div class="chips" title="第一性原理三问 → 六步诊断 → A/B/C 采信 → 知识网络 + 本库">
+        <span class="chip">三问</span><span class="chip">六步诊断</span><span class="chip">A/B/C 采信</span>
+      </div>
+      <div class="q">
+        <span class="chip">失败模式同族如何量化</span>
+        <span class="chip">仿真→真机排序对照表仍薄</span>
+        <span class="chip">Scene-acceptance 一般规则</span>
+        <details class="more"><summary>更多</summary>
+          <div class="q" style="margin-top:4px">
+            <span class="chip">资产互操作是否收敛</span>
+            <span class="chip">统一基准与公开测试集</span>
+            <span class="chip">诊断协议产品化</span>
+          </div>
+        </details>
+      </div>
+      <div class="next">下一刀：开放问题驱动采矿；跨方法仿真→真机排序</div>
     </article>
   </section>
 
-  <div class="card">
-    <h2>证据等级</h2>
-    <div class="evrow">
-      <span class="it" title="A：公开代码 + 明确评测协议 + 真机对照，失败模式同族可检查 → 可指导选型"><span class="gr a">A</span> 代码+协议+真机对照 → 指导选型</span>
-      <span class="it" title="B：理论或一手叙事清楚，落地部分公开 → 可作方向，需复现"><span class="gr b">B</span> 一手叙事清楚、落地部分公开 → 需复现</span>
-      <span class="it" title="C：演示、二手转发、无基准 → 默认降权，不建卡"><span class="gr am">C</span> 演示/二手/无基准 → 降权不建卡</span>
-    </div>
+  <div class="card ev">
+    <span class="h" style="margin:0">证据等级</span>
+    <span class="it" title="A：代码+评测协议+真机对照，失败模式同族可查 → 指导选型"><span class="dot" style="background:var(--ok)"></span><b style="color:var(--ok)">A</b> 代码·协议·真机</span>
+    <span class="it" title="B：理论/叙事清楚，落地部分公开 → 可作方向，需复现"><span class="dot" style="background:var(--warn)"></span><b style="color:var(--warn)">B</b> 叙事清·落地部分公开</span>
+    <span class="it" title="C：演示/二手/无基准 → 默认降权，不建卡"><span class="dot" style="background:var(--bad)"></span><b style="color:var(--bad)">C</b> 演示/二手 → 不建卡</span>
   </div>
-
 </main>
-
 <footer>
   <details>
-    <summary>仓库地图 / 默认栈全量 / 真源</summary>
-    <div class="fgrid">
-      <div><b>可拆积木</b><br>ObjectGS + DIGS → DISCOVERSE（MuJoCo 真机）；平面：3D Gaussian Flats ∥ AtlasGS；删除评测：Remove360 RQS ∥ Inpaint360GS（分轴，勿互相替代）；导出：mesh → Scalable Real2Sim（凸碰撞+惯量）</div>
-      <div><b>多源成景</b><br>AffordCraft → LayoutVLM / Steerable → 门禁；AffordCraft G ↔ 对标 SimReady FET + SimReadyBench（补强字段，不换栈）；Acceptance：资产级 SimReadyBench / 场景级 SimFoundry ↔ YUBI ↔ Measuring ↔ X2Real(r=0.84) ↔ R2S-Eval</div>
-      <div><b>不冻栈</b><br>task-skill 快环 + meta-skill 慢环 · stage-win 门禁 · Page/memory/本库 晋升；已采纳 dashboard-sync · proposition-mine-return · specialist-harness · knowledge-brain-rsi · stage-win-card · real2sim-diagnose</div>
-      <div><b>判官台</b><br>第一性原理三问 → 六步诊断 → A/B/C 采信 → 知识网络 + 本库；真源 Page <code>523c7b67…</code> · <code>knowledge/</code> + <code>knowledge/cards/</code></div>
+    <summary>仓库地图 / 默认栈全量</summary>
+    <div class="fg">
+      <div><b>可拆积木</b><br>ObjectGS + DIGS → DISCOVERSE；Flats ∥ AtlasGS；RQS ∥ Inpaint360GS；mesh → Scalable Real2Sim</div>
+      <div><b>多源成景</b><br>AffordCraft → LayoutVLM/Steerable → 门禁；G ↔ SimReady FET+Bench；Acceptance 资产/场景门禁族</div>
+      <div><b>不冻栈</b><br>快环 skill + 慢环 meta · stage-win；技能：dashboard-sync · proposition-mine-return · specialist-harness · knowledge-brain-rsi · stage-win-card · real2sim-diagnose</div>
+      <div><b>判官台</b><br>三问 → 六步诊断 → A/B/C → knowledge/ + cards/；Page 523c7b67…</div>
     </div>
-    <p style="margin:8px 0 0">目录：<code>propositions/</code> · <code>knowledge/cards/</code> · <code>journal/</code> · <code>methodology/</code> · <code>ops/sync-protocol.md</code></p>
   </details>
-  <p style="margin:8px 0 0">生成自 Markdown 真源镜像 · 非 Cursor Canvas 运行时 · 成熟度条为种子相对值</p>
 </footer>
 <script>
-(() => {
-  const btns = [...document.querySelectorAll('nav button')];
-  const nodes = [...document.querySelectorAll('[data-p]')];
-  const apply = (f) => {
-    btns.forEach(b => b.classList.toggle('active', (b.dataset.f || '') === f));
-    nodes.forEach(el => {
-      const show = f === 'all' || el.getAttribute('data-p') === f;
-      if (el.tagName === 'TR') el.style.display = show ? '' : 'none';
-      else el.style.display = show ? '' : 'none';
-    });
-  };
-  btns.forEach(b => b.addEventListener('click', () => apply(b.dataset.f || 'all')));
-  apply('all');
-})();
+(()=>{const btns=[...document.querySelectorAll('nav button')];const nodes=[...document.querySelectorAll('[data-p]')];
+const apply=f=>{btns.forEach(b=>b.classList.toggle('active',(b.dataset.f||'')===f));nodes.forEach(el=>{const show=f==='all'||el.getAttribute('data-p')===f;el.classList.toggle('hidden',!show);});};
+btns.forEach(b=>b.addEventListener('click',()=>apply(b.dataset.f||'all')));apply('all');})();
 </script>
 </body>
 </html>
