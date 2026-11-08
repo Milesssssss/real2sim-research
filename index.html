@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Real-to-Sim 研究命题看板</title>
+<style>
+  :root { --bg:#0b0f14; --card:#121821; --line:#1e2a38; --text:#e7eef7; --muted:#8aa0b5; --ok:#3dd68c; --warn:#f5a524; --bad:#f31260; --accent:#6ea8fe; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:15px/1.55 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; background:var(--bg); color:var(--text); }
+  header { padding:28px 24px 12px; border-bottom:1px solid var(--line); }
+  header h1 { margin:0 0 6px; font-size:22px; }
+  header p { margin:0; color:var(--muted); max-width:72ch; }
+  nav { display:flex; gap:8px; flex-wrap:wrap; padding:16px 24px; position:sticky; top:0; background:rgba(11,15,20,.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--line); z-index:2; }
+  nav button { background:transparent; border:1px solid var(--line); color:var(--text); border-radius:999px; padding:6px 12px; cursor:pointer; }
+  nav button.active { background:var(--accent); color:#041018; border-color:transparent; font-weight:600; }
+  main { padding:20px 24px 64px; display:grid; gap:16px; }
+  .grid { display:grid; gap:16px; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px; }
+  .card h2 { margin:0 0 8px; font-size:16px; }
+  .meta { color:var(--muted); font-size:13px; }
+  .badge { display:inline-block; padding:2px 8px; border-radius:999px; font-size:12px; font-weight:600; }
+  .badge.ok { background:rgba(61,214,140,.15); color:var(--ok); }
+  .badge.warn { background:rgba(245,165,36,.15); color:var(--warn); }
+  .bar { height:10px; background:#0a1018; border-radius:999px; overflow:hidden; margin-top:8px; }
+  .bar > i { display:block; height:100%; background:linear-gradient(90deg,#3d7eff,var(--ok)); }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th, td { text-align:left; padding:8px 6px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--muted); font-weight:600; }
+  a { color:var(--accent); }
+  footer { padding:0 24px 40px; color:var(--muted); font-size:12px; }
+  .hidden { display:none; }
+  ul { margin:8px 0 0; padding-left:18px; }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:12px; background:#0a1018; padding:1px 5px; border-radius:4px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Real-to-Sim 研究命题看板</h1>
+  <p>只看不决策。真源仓库 <a href="https://github.com/Milesssssss/real2sim-research">Milesssssss/real2sim-research</a> · 交互页仍在 Cursor Pages。修订：2026-11-08 Asia/Shanghai。</p>
+</header>
+<nav id="filters">
+  <button class="active" data-f="all">全部</button>
+  <button data-f="gen">可拆积木</button>
+  <button data-f="use">多源成景</button>
+  <button data-f="rsi">不冻栈</button>
+  <button data-f="domain">判官台</button>
+</nav>
+<main>
+  <section class="grid" id="overview">
+    <div class="card"><h2>编排</h2><div class="meta">刘亦菲超脑 → 沈括｜情报矿工 · 达摩｜RSI审计</div><p style="margin:8px 0 0">核链并网后同步本库；X list 仅入口不增热度。</p></div>
+    <div class="card"><h2>最近并网</h2><div class="meta">2026-11-08</div><p style="margin:8px 0 0">DISCOVERSE · SimReady/Bench · X2Real · AtlasGS · Inpaint360GS · 3DAlign-DAER</p><span class="badge ok">已核链</span></div>
+    <div class="card"><h2>成熟度（相对）</h2>
+      <div class="meta">生成层 72</div><div class="bar"><i style="width:72%"></i></div>
+      <div class="meta" style="margin-top:8px">使用层 78</div><div class="bar"><i style="width:78%"></i></div>
+      <div class="meta" style="margin-top:8px">RSI 65</div><div class="bar"><i style="width:65%"></i></div>
+      <div class="meta" style="margin-top:8px">总控 80</div><div class="bar"><i style="width:80%"></i></div>
+    </div>
+  </section>
+
+  <section class="card" id="board">
+    <h2>命题板</h2>
+    <table>
+      <thead><tr><th>命题</th><th>瓶颈</th><th>默认栈</th><th>阶段</th><th>下一刀</th><th>等级</th></tr></thead>
+      <tbody>
+        <tr data-p="gen"><td>『可拆积木』生成</td><td>组合几何 + 边界保真</td><td>ObjectGS+DIGS → DISCOVERSE；Flats∥AtlasGS；RQS∥Inpaint360GS</td><td>MuJoCo 已补；Isaac 仍薄</td><td>Isaac 对象级真机；分轴 checklist</td><td><span class="badge warn">B→A-</span></td></tr>
+        <tr data-p="use"><td>『多源成景』使用</td><td>元数据卡 + 约束布局 + 门禁</td><td>AffordCraft→摆放→门禁；G↔SimReady FET；Acceptance=Bench×X2Real…</td><td>默认栈不换；门禁已补强</td><td>FET 映射；场景×资产协议；库 slope</td><td><span class="badge warn">B→A-</span></td></tr>
+        <tr data-p="rsi"><td>『不冻栈』RSI</td><td>快环技能化 vs 慢环门禁</td><td>task-skill 快环 + meta 慢环 · stage-win</td><td>方法论+skill+周一慢环在线</td><td>慢环审计提案复核</td><td><span class="badge ok">运行中</span></td></tr>
+        <tr data-p="domain"><td>『判官台』总控</td><td>理论·情报·落地同时够硬</td><td>三问 → 六步诊断 → A/B/C → 真源</td><td>知识网络持续并网</td><td>开放问题驱动采矿</td><td><span class="badge ok">权威</span></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="grid">
+    <div class="card" data-p="gen"><h2>可拆积木 · 开放问题</h2><ul>
+      <li>Isaac 侧对象级可组合真机对照仍缺</li>
+      <li>Flats∥AtlasGS 本机是否同向升 F</li>
+      <li>RQS∥Inpaint360GS 分轴 checklist</li>
+    </ul></div>
+    <div class="card" data-p="use"><h2>多源成景 · 开放问题</h2><ul>
+      <li>AffordCraft G ↔ SimReady FET 映射表</li>
+      <li>场景×资产单一联合协议</li>
+      <li>库规模→gate-pass slope</li>
+    </ul></div>
+  </section>
+
+  <section class="card">
+    <h2>检查清单</h2>
+    <ul>
+      <li>✅ 总控知识网络 + 诊断协议 + stage-win</li>
+      <li>✅ 生成/使用层矿工并网</li>
+      <li>✅ DISCOVERSE MuJoCo 真机</li>
+      <li>☐ Isaac 对象级真机</li>
+      <li>☐ AffordCraft G ↔ SimReady FET 映射</li>
+      <li>☐ Acceptance 场景×资产单一协议</li>
+      <li>☐ 库→gate slope</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>仓库地图</h2>
+    <p class="meta">Markdown 真源目录（与本页同源仓库）</p>
+    <ul>
+      <li><code>propositions/</code> 四代号卡</li>
+      <li><code>knowledge/cards/</code> 证据卡一卡一文件</li>
+      <li><code>journal/</code> 过程日志</li>
+      <li><code>methodology/</code> RSI / 知识大脑</li>
+      <li><code>ops/sync-protocol.md</code> Page ↔ GitHub 同步</li>
+    </ul>
+  </section>
+</main>
+<footer>
+  生成自编排超脑落库种子 · 非 Cursor Canvas 运行时。更新方式：改仓库 Markdown / 本 HTML 后推 main。
+</footer>
+<script>
+const buttons = [...document.querySelectorAll('nav button')];
+const rows = [...document.querySelectorAll('[data-p]')];
+buttons.forEach(b => b.addEventListener('click', () => {
+  buttons.forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  const f = b.dataset.f;
+  rows.forEach(el => {
+    const show = f === 'all' || el.dataset.p === f;
+    if (el.tagName === 'TR') el.classList.toggle('hidden', !show);
+    else el.style.display = show ? '' : 'none';
+  });
+}));
+</script>
+</body>
+</html>
