@@ -1,361 +1,330 @@
 <!DOCTYPE html>
-<html lang="zh-Hans">
+<html lang="zh-CN">
 <head>
 <meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Real-to-Sim 研究命题看板</title>
-<!-- research-board-html floor-H+diag2+G
-- [x] A 保真：成熟度定性（探索|可用|稳固|待评估·人工判断·非测量值）；命题等级/瓶颈/下一刀未改
-- [x] B 3秒扫：四卡标题+等级pill+瓶颈/阶段+下一刀行
-- [x] C 芯片化；四卡三行齐；并网单行·色点醒/次于下一刀；accent≤2 打在可拆积木 Isaac 下一刀
-- [x] D 可筛；单文件；系统字体
-- [x] F Pages：判官台 OQ 6→2 密度归档 + 可拆积木 G-N2 消双写
-- [x] G1 下一刀独立行不进 chip 流；遮芯片仍可读状态+下一刀
-- [x] G2 全板 pill+chip；四卡三行节奏；并网单行
-- [x] G3
-- [x] H1 aria-pressed + landmarks + focus-visible
-- [x] H2 contrast tokens raised
-- [x] H3
-- [x] E two diagram islands (workflow+hook) via diagram-design color≠sole; bars; no pie/ring accent 对焦可拆积木·Isaac；多源 FET 下一刀 muted
--->
-<style>
-:root{--bg:#090d12;--card:#111823;--ink:#0c121a;--line:#1c2836;--text:#e8eef7;--muted:#a3b7cc;--dim:#8a9fb4;--ok:#3dd68c;--warn:#f5a524;--bad:#f31260;--acc:#6ea8fe;--cy:#39d0d8}
-*{box-sizing:border-box}html,body{margin:0}
-body{background:var(--bg);color:var(--text);font:12.5px/1.35 ui-sans-serif,system-ui,-apple-system,"Segoe UI","PingFang SC","Noto Sans SC",sans-serif}
-a{color:var(--muted);text-decoration:none}a:hover{color:var(--text)}
-header{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline;padding:8px 14px;border-bottom:1px solid var(--line)}
-header h1{margin:0;font-size:14.5px}
-.meta{color:var(--muted);font-size:11px;display:flex;gap:8px;flex-wrap:wrap}
-nav{position:sticky;top:0;z-index:5;display:flex;gap:6px;flex-wrap:wrap;padding:7px 14px;background:rgba(9,13,18,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-nav button{border:1px solid var(--line);background:var(--ink);color:var(--text);border-radius:999px;padding:3px 11px;font:12px inherit;cursor:pointer}
-nav button:focus{outline:none}
-nav button:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
-nav button.active,[aria-pressed="true"]{background:var(--acc);color:#061018;border-color:transparent;font-weight:700}
-main{max-width:1180px;margin:0 auto;padding:10px 14px 36px;display:grid;gap:10px}
-.top{display:grid;gap:10px;grid-template-columns:200px 1fr;align-items:stretch}
-.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px 10px}
-.h{margin:0 0 6px;font-size:10px;letter-spacing:.7px;color:var(--muted);font-weight:700}
-.mats{display:grid;gap:5px}
-.mat{display:grid;grid-template-columns:34px 1fr;gap:6px;align-items:center;color:var(--muted);font-size:11px}
-.mat b{color:var(--text)}
-.bar{height:5px;border-radius:99px;background:var(--ink);overflow:hidden}
-.bar>i{display:block;height:100%;background:linear-gradient(90deg,#4d7ab8,var(--cy))}
-.rec{display:flex;flex-wrap:nowrap;gap:6px;overflow-x:auto;padding-bottom:2px}
-.rc{flex:0 0 auto;background:var(--ink);border:1px solid var(--line);border-radius:999px;padding:3px 9px;font-size:11px;white-space:nowrap;display:inline-flex;align-items:center;gap:5px}
-.rc b{font-weight:700}
-.gr{display:inline-flex;align-items:center;justify-content:center;min-width:18px;height:16px;font-size:10px;font-weight:800;padding:0 5px;border-radius:999px;border:1px solid;letter-spacing:.2px}
-.gr.a{color:#062416;background:var(--ok);border-color:transparent}
-.gr.am{color:#042428;background:var(--cy);border-color:transparent}
-.gr.b{color:#2a1a02;background:var(--warn);border-color:transparent}
-.rc .dotg{width:9px;height:9px;border-radius:50%;flex:0 0 auto;box-shadow:0 0 0 2px rgba(255,255,255,.06)}
-.rc .dotg.a{background:var(--ok)}.rc .dotg.am{background:var(--cy)}.rc .dotg.b{background:var(--warn)}
-.rc .gr{opacity:.92}
-.next.focus{color:var(--acc);font-weight:700;letter-spacing:.1px}
-.next.muted{color:var(--muted);font-weight:500}
-.props{display:grid;gap:10px;grid-template-columns:1.15fr 1.15fr .95fr .95fr;align-items:stretch}
-.prop{display:grid;grid-template-rows:auto auto auto auto auto;gap:6px;min-height:132px;position:relative;overflow:visible}
-.row1{display:flex;justify-content:space-between;align-items:center;gap:6px;min-height:28px}
-.row1 h3{margin:0;font-size:13px}
-.row1 .layer{color:var(--dim);font-size:10.5px}
-.row2{display:flex;flex-wrap:wrap;gap:4px;align-items:center;min-height:24px}
-.row3{display:flex;align-items:flex-start;min-height:34px}
-.pill{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:999px;border:1px solid;white-space:nowrap}
-.dot{width:7px;height:7px;border-radius:50%}
-.pill.up{color:var(--ok);border-color:rgba(61,214,140,.4);background:rgba(61,214,140,.1)}
-.pill.up .dot{background:var(--ok)}
-.pill.run{color:var(--warn);border-color:rgba(245,165,36,.4);background:rgba(245,165,36,.1)}
-.pill.run .dot{background:var(--warn)}
-.pill.auth{color:#9fc0f5;border-color:rgba(159,192,245,.35);background:rgba(110,168,254,.08)}
-.pill.auth .dot{background:#9fc0f5}
-.chip{font-size:10.5px;padding:2px 7px;border-radius:6px;background:var(--ink);border:1px solid var(--line);color:#c5d6e8;white-space:nowrap}
-.chip.warn{border-color:rgba(245,165,36,.4);color:#f0c27a}
-.chip.stage{border-color:rgba(138,160,181,.35);color:var(--muted)}
-.chip.stack{color:#a9bdd0}
-.next{font-size:12px;line-height:1.4;font-weight:600;color:var(--text)}
-.next.focus{color:var(--acc)}
-.next.muted{color:var(--dim);font-weight:500}
-details.more{margin:0;min-height:18px}
-details.more>summary{cursor:pointer;color:var(--dim);font-size:10.5px;list-style:none;display:inline-flex;align-items:center;gap:4px;padding:0;user-select:none}
-details.more>summary::-webkit-details-marker{display:none}
-details.more>summary::before{content:'▸';font-size:9px;opacity:.7}
-details.more[open]>summary::before{content:'▾'}
-details.more>summary .n{font-variant-numeric:tabular-nums;color:var(--muted)}
-details.more .q{position:absolute;left:8px;right:8px;top:calc(100% - 2px);z-index:4;display:flex;flex-wrap:wrap;gap:4px;margin:0;padding:8px;background:var(--card);border:1px solid var(--line);border-radius:10px;box-shadow:none}
-.q .chip{white-space:normal;max-width:100%;line-height:1.3}
-.ev{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;padding:5px 8px!important}
-.diagram{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px 10px 6px}
-.diagram .h{margin:0 0 4px}
-.diagram svg{display:block;width:100%;height:auto;max-height:120px}
-.diagram .cap{margin:2px 0 0;color:var(--dim);font-size:10px}
-
-.ev .h{font-size:9.5px;letter-spacing:.5px}
-.ev .it{display:inline-flex;align-items:center;gap:4px;color:var(--muted);font-size:10.5px;cursor:help}
-.ev .it b{font-weight:700;font-size:10px}
-.ev .dot{display:inline-block;width:6px;height:6px}
-footer{max-width:1180px;margin:0 auto;padding:0 14px 22px;color:var(--muted);font-size:10.5px}
-footer details{background:transparent;border:1px dashed var(--line);border-radius:8px;padding:5px 8px}
-footer summary{cursor:pointer;color:var(--dim);font-size:10.5px}
-footer details[open]{opacity:1;background:var(--card);border-style:solid}
-.fg{display:grid;gap:6px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:8px}
-.fg div{background:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 8px;color:var(--muted);font-size:11px;line-height:1.4}
-.fg b{color:var(--text)}
-.hidden{display:none!important}
-@media(max-width:980px){.props{grid-template-columns:1fr 1fr}.top{grid-template-columns:1fr}}
-@media(max-width:560px){.props{grid-template-columns:1fr}}
-
-.intro{padding:7px 14px;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center}
-.intro p{margin:0;color:var(--muted);font-size:11.5px;line-height:1.45;flex:1 1 320px}
-.intro .tags{display:inline-flex;gap:5px;flex-wrap:wrap}
-.rc a{color:inherit;text-decoration:none}
-.rc a:hover{color:var(--text);text-decoration:underline}
-.fields{display:grid;gap:2px;font-size:10.5px;line-height:1.35;color:var(--muted);padding:1px 0 2px}
-.fields .fl{display:grid;grid-template-columns:64px 1fr;gap:4px;align-items:start}
-.fields .fl b{color:var(--dim);font-weight:600;font-size:10px;white-space:nowrap}
-.fields .fl span{color:#c5d6e8}
-.etag{font-size:9.5px;padding:1px 6px;border-radius:999px;background:rgba(57,208,216,.1);border:1px solid rgba(57,208,216,.32);color:var(--cy);margin-left:2px;white-space:nowrap}
-</style>
+<link rel="stylesheet" href="assets/board.css"/>
 </head>
 <body>
-<header>
+<div class="wrap">
+
+<header class="site-header">
   <h1>Real-to-Sim 研究命题看板</h1>
-  <div class="meta"><a href="https://github.com/Milesssssss/real2sim-research">真源仓库</a><span>只看不决策</span><span>2026-11-08 Asia/Shanghai</span></div>
-</header>
-<section class="intro" aria-label="看板导读">
-  <p>用可复核证据，把 Real→Sim→Real 的生成与使用瓶颈拆成可实验命题。 · <a href="https://github.com/Milesssssss/real2sim-research/blob/main/knowledge/board-intro.md">导读</a></p>
-  <span class="tags"><span class="chip">技术研究</span><span class="chip">Agent 运行治理</span></span>
-</section>
-<nav aria-label="命题筛选">
-  <button type="button" class="active" data-f="all" aria-pressed="true">全部</button>
-  <button type="button" data-f="可拆积木" aria-pressed="false">可拆积木</button>
-  <button type="button" data-f="多源成景" aria-pressed="false">多源成景</button>
-  <button type="button" data-f="不冻栈" aria-pressed="false">不冻栈</button>
-  <button type="button" data-f="判官台" aria-pressed="false">判官台</button>
-</nav>
-<main id="board-main">
-  <section class="top">
-    <div class="card">
-      <div class="h">成熟度</div>
-      <div class="mats" role="group" aria-label="四命题成熟度（定性·人工判断·非测量值）">
-        <div class="mat"><span>生成</span><b title="2026-11-08 · MuJoCo 真机链已补；Isaac 对象级仍薄 · 人工判断">可用</b></div>
-        <div class="mat"><span>使用</span><b title="2026-11-08 · 默认栈不换；SimReady 门禁补强中 · 人工判断">可用</b></div>
-        <div class="mat"><span title="RSI：递归自改进——任务技能快环+元技能慢环，避免方法栈冻结">RSI</span><b title="2026-11-08 · 方法论+skill 在线；慢环审计刚起步 · 人工判断">探索</b></div>
-        <div class="mat"><span>总控</span><b title="2026-11-08 · 采信规则在线；开放问题驱动采矿 · 人工判断">可用</b></div>
-      </div>
-      <p class="cap" style="margin:4px 0 0;font-size:10px;color:var(--dim)">成熟度·人工判断·非测量值 · 真源 knowledge/maturity.md</p>
-    </div>
-    <div class="card">
-      <div class="h">证据带 · 最近并网 · 2026-11-08</div>
-      <div class="rec">
-        <span class="rc" data-p="可拆积木"><span class="dotg am"></span><a href="https://github.com/Milesssssss/real2sim-research/blob/main/knowledge/cards/DISCOVERSE.md"><b>DISCOVERSE</b></a><span class="gr am">A-</span><span class="etag" title="evidence_tags">开源复现</span></span>
-        <span class="rc" data-p="可拆积木"><span class="dotg am"></span><a href="https://github.com/Milesssssss/real2sim-research/blob/main/knowledge/cards/AtlasGS.md"><b>AtlasGS</b></a><span class="gr am">A-</span><span class="etag" title="evidence_tags">外部报道/论文结论</span></span>
-        <span class="rc" data-p="可拆积木"><span class="dotg b"></span><a href="https://github.com/Milesssssss/real2sim-research/blob/main/knowledge/cards/Inpaint360GS.md"><b>Inpaint360GS</b></a><span class="gr b">B</span></span>
-        <span class="rc" data-p="多源成景"><span class="dotg am"></span><a href="https://github.com/Milesssssss/real2sim-research/blob/main/knowledge/cards/SimReady-Foundation.md"><b>SimReady</b></a><span class="gr am">A-</span><span class="etag" title="evidence_tags">场景适配工程判断</span></span>
-        <span class="rc" data-p="多源成景"><span class="dotg am"></span><a href="https://github.com/Milesssssss/real2sim-research/blob/main/knowledge/cards/X2Real.md"><b>X2Real</b></a><span class="gr am">A-</span></span>
-        <span class="rc" data-p="多源成景"><span class="dotg b"></span><a href="https://github.com/Milesssssss/real2sim-research/blob/main/knowledge/cards/3DAlign-DAER.md"><b>3DAlign-DAER</b></a><span class="gr b">B</span></span>
-      </div>
-    </div>
+  <section class="intro" aria-label="看板导读">
+    <p>用可复核证据，把 Real→Sim→Real 的生成与使用瓶颈拆成可实验命题。</p>
+    <span class="tags">
+      <span class="tag">技术研究</span>
+      <span class="tag">Agent 运行治理</span>
+    </span>
   </section>
-
-
-  <section class="diagram" aria-label="工作流闭环图">
-    <div class="h">工作流闭环</div>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 96" role="img" aria-labelledby="wf-t wf-d">
-      <title id="wf-t">工作流闭环</title>
-      <desc id="wf-d">命题到开放问题的主链，核链虚线复核回诊断，开放问题虚线再诊断回诊断。</desc>
-      <defs>
-        <marker id="aw" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#8a9fb4"/></marker>
-        <marker id="aw-acc" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6ea8fe"/></marker>
-      </defs>
-      <!-- nodes y=16 h=28 rx=8 · 4px grid -->
-      <g font-family="ui-sans-serif,system-ui,sans-serif" font-size="11" text-anchor="middle">
-        <rect x="16" y="16" width="88" height="28" rx="8" fill="#0c121a" stroke="#1c2836"/>
-        <text x="60" y="34" fill="#e8eef7">命题</text>
-        <rect x="152" y="16" width="88" height="28" rx="8" fill="rgba(110,168,254,.14)" stroke="#6ea8fe"/>
-        <text x="196" y="34" fill="#e8eef7" font-weight="700">诊断</text>
-        <rect x="288" y="16" width="88" height="28" rx="8" fill="#0c121a" stroke="#1c2836"/>
-        <text x="332" y="34" fill="#e8eef7">B卡</text>
-        <rect x="424" y="16" width="88" height="28" rx="8" fill="#0c121a" stroke="#1c2836"/>
-        <text x="468" y="34" fill="#e8eef7">采矿</text>
-        <rect x="560" y="16" width="88" height="28" rx="8" fill="#0c121a" stroke="#1c2836"/>
-        <text x="604" y="34" fill="#e8eef7">核链</text>
-        <rect x="696" y="16" width="88" height="28" rx="8" fill="rgba(110,168,254,.14)" stroke="#6ea8fe"/>
-        <text x="740" y="34" fill="#e8eef7" font-weight="700">并网</text>
-        <rect x="832" y="16" width="112" height="28" rx="8" fill="#0c121a" stroke="#1c2836"/>
-        <text x="888" y="34" fill="#e8eef7">开放问题</text>
-      </g>
-      <!-- forward edges -->
-      <g fill="none" stroke="#8a9fb4" stroke-width="1.5" marker-end="url(#aw)">
-        <path d="M104 30H152"/>
-        <path d="M240 30H288"/>
-        <path d="M376 30H424"/>
-        <path d="M512 30H560"/>
-        <path d="M648 30H696"/>
-        <path d="M784 30H832"/>
-      </g>
-      <!-- dashed feedback: 核链→诊断 复核；开放问题→诊断 再诊断 -->
-      <g fill="none" stroke="#6ea8fe" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#aw-acc)">
-        <path d="M604 44V68H196V44"/>
-        <path d="M888 44V80H196V44"/>
-      </g>
-      <g font-family="ui-sans-serif,system-ui,sans-serif" font-size="10" fill="#6ea8fe">
-        <text x="400" y="64">复核</text>
-        <text x="520" y="90">再诊断</text>
-      </g>
-    </svg>
-  </section>
-
-  <section class="props" id="board">
-    <!-- 自检：S1✓ H4✓ M2✓ G-N1✓ G-N2✓（OQ0≠next）G-Q2✓ 密度OQ=3 P-E0：E=off · 表胜图：单卡补丁无新关系
-         债：消 G-N2 近双写；方法先例见 增量补丁协议/干跑-可拆积木（本包为内容推送正式 OUT） -->
-    <article class="card prop" data-p="可拆积木">
-      <div class="row1"><div><h3>可拆积木</h3><div class="layer">生成层</div></div><span class="pill up" title="等级 B→A-"><span class="dot"></span>B→A-</span></div>
-      <div class="row2">
-        <span class="chip warn" title="组合几何资产 + 对象-环境边界保真（非物理优先）">瓶颈·组合几何/边界</span>
-        <span class="chip stage" title="MuJoCo 真机缺口已补（DISCOVERSE）；Isaac 侧仍薄">阶段·MuJoCo✓ Isaac薄</span>
-        <span class="chip stack" title="ObjectGS + DIGS → DISCOVERSE；Flats∥AtlasGS 另条">栈·ObjectGS+DIGS∥DISCOVERSE</span>
-        <span class="chip stack" title="3D Gaussian Flats ∥ AtlasGS">Flats∥AtlasGS</span>
-      </div>
-      <div class="fields" aria-label="可拆积木字段">
-        <div class="fl"><b>目标</b><span>对象/像素→可组合对象级 GS 资产</span></div>
-        <div class="fl"><b>推荐技术组合</b><span>假设 ObjectGS+DIGS→DISCOVERSE；已验证 MuJoCo 真机缺口已补；Isaac 未验证</span></div>
-        <div class="fl"><b>最近相关证据</b><span>DISCOVERSE 等（ACT/DP·测量）</span></div>
-        <div class="fl"><b>未解瓶颈</b><span>组合几何+对象-环境边界；Isaac 对照仍缺</span></div>
-        <div class="fl"><b>下一实验</b><span>输出物·Isaac 对象级真机对照记录；输入/指标/门槛/负责人 待定义</span></div>
-      </div>
-      <div class="row3"><div class="next focus" title="vs DISCOVERSE MuJoCo；指标/门槛待定义；平面/删除分轴 checklist">下一实验 · Isaac 对象级真机对照（vs DISCOVERSE MuJoCo；指标/门槛待定义）</div></div>
-      <details class="more"><summary>开放问题 <span class="n">3</span></summary><div class="q">
-        <span class="chip">使用侧消费 Isaac 输出时的字段表仍缺</span>
-        <span class="chip">Flats∥AtlasGS 本机对照</span>
-        <span class="chip">RQS∥Inpaint360GS 分轴 checklist</span>
-      </div></details>
-    </article>
-
-    <article class="card prop" data-p="多源成景">
-      <div class="row1"><div><h3>多源成景</h3><div class="layer">使用层</div></div><span class="pill up" title="等级 B→A-"><span class="dot"></span>B→A-</span></div>
-      <div class="row2">
-        <span class="chip warn" title="资产元数据卡 + 物理/任务约束布局 + 接受门禁">瓶颈·元数据/布局/门禁</span>
-        <span class="chip stage" title="默认栈不换；门禁规范已用 SimReady 补强">阶段·不换栈·门禁补强</span>
-        <span class="chip stack" title="AffordCraft → LayoutVLM / Steerable；门禁·SimReady 保位">栈·AffordCraft∥Layout/Steerable</span>
-        <span class="chip stack" title="SimReady FET + Bench 补强门禁">门禁·SimReady</span>
-      </div>
-      <div class="fields" aria-label="多源成景字段">
-        <div class="fl"><b>目标</b><span>多源→检索/摆放→过门禁场景</span></div>
-        <div class="fl"><b>推荐技术组合</b><span>假设 AffordCraft→Layout/Steerable→门禁；已验证 SimReady 规范补强</span></div>
-        <div class="fl"><b>最近相关证据</b><span>X2Real r=0.84（测量）等</span></div>
-        <div class="fl"><b>未解瓶颈</b><span>元数据/联合协议/gate-pass slope</span></div>
-        <div class="fl"><b>下一实验</b><span>输出物·FET 映射表；对照/指标/门槛/负责人 待定义</span></div>
-      </div>
-      <div class="row3"><div class="next muted" title="AffordCraft G ↔ SimReady FET；对照/门槛待定义；场景×资产协议；库→gate slope">下一实验 · AffordCraft G ↔ SimReady FET 映射（对照/门槛待定义）</div></div>
-      <details class="more"><summary>开放问题 <span class="n">3</span></summary><div class="q">
-        <span class="chip">AffordCraft G ↔ SimReady FET 映射表</span>
-        <span class="chip">场景×资产单一联合协议</span>
-        <span class="chip">库规模→gate-pass slope</span>
-      </div></details>
-    </article>
-
-    <article class="card prop" data-p="不冻栈">
-      <div class="row1"><div><h3>不冻栈</h3><div class="layer">RSI</div></div><span class="pill run" title="状态：运行中"><span class="dot"></span>运行中</span></div>
-      <div class="row2">
-        <span class="chip warn" title="快环技能化 vs 慢环元技能晋升门槛">瓶颈·快环/慢环门禁</span>
-        <span class="chip stage" title="方法论+skill+周一慢环在线">阶段·慢环在线</span>
-        <span class="chip stack" title="task-skill 快环 ∥ meta-skill 慢环；stage-win 保位">栈·task-skill∥meta</span>
-        <span class="chip stack" title="stage-win 门禁">stage-win</span>
-      </div>
-      <div class="fields" aria-label="不冻栈字段">
-        <div class="fl"><b>目标</b><span>判断栈持续进化不冻结</span></div>
-        <div class="fl"><b>推荐技术组合</b><span>假设 快环∥慢环·stage-win；已验证 技能在跑</span></div>
-        <div class="fl"><b>最近相关证据</b><span>已采纳技能 + 周一慢环节律</span></div>
-        <div class="fl"><b>未解瓶颈</b><span>快/慢环门禁</span></div>
-        <div class="fl"><b>下一实验</b><span>输出物·周一慢环轻审计纪要；对照/指标/门槛 待定义；负责人达摩·周一</span></div>
-      </div>
-      <div class="row3"><div class="next muted" title="达摩·周一；对照/门槛待定义；≤3 提案">下一实验 · 周一慢环轻审计（对照/门槛待定义）</div></div>
-      <details class="more"><summary>开放问题 <span class="n">2</span></summary><div class="q">
-        <span class="chip">快环技能化漏记检查</span>
-        <span class="chip">慢环晋升门禁过严/过松</span>
-      </div></details>
-    </article>
-
-    <!-- 自检：S1✓ H4✓ M2✓ G-N1✓ G-N2✓ G-Q2✓ 密度OQ=2≤软顶 P-E0：E=off · 表胜图：单卡补丁无新关系
-         归档出卡（历史真源，不在 .q）：Scene-acceptance一般规则；资产互操作是否收敛；统一基准与公开测试集；诊断协议产品化 -->
-    <article class="card prop" data-p="判官台">
-      <div class="row1"><div><h3>判官台</h3><div class="layer">总控</div></div><span class="pill auth" title="状态：权威"><span class="dot"></span>权威</span></div>
-      <div class="row2">
-        <span class="chip warn" title="理论 · 情报 · 落地 三层同时够硬">瓶颈·三层同时够硬</span>
-        <span class="chip stage" title="知识网络持续并网">阶段·持续并网</span>
-        <span class="chip stack" title="第一性原理三问；六步诊断；A/B/C 采信">栈·三问∥六步∥A/B/C</span>
-      </div>
-      <div class="fields" aria-label="判官台字段">
-        <div class="fl"><b>目标</b><span>可辩护路线/风险/实验建议</span></div>
-        <div class="fl"><b>推荐技术组合</b><span>假设 三问→六步→A/B/C；已验证 权威页+本库</span></div>
-        <div class="fl"><b>最近相关证据</b><span>Page + knowledge/cards</span></div>
-        <div class="fl"><b>未解瓶颈</b><span>三层同时够硬</span></div>
-        <div class="fl"><b>下一实验</b><span>采矿窗+排序表草稿；对照/指标/门槛/负责人 待定义</span></div>
-      </div>
-      <div class="row3"><div class="next muted" title="开放问题驱动采矿窗；跨方法仿真→真机排序；对照/门槛待定义">下一实验 · 开放问题驱动采矿（排序对照/门槛待定义）</div></div>
-      <details class="more"><summary>开放问题 <span class="n">2</span></summary><div class="q">
-        <span class="chip">失败模式同族如何量化</span>
-        <span class="chip">仿真→真机排序对照表仍薄</span>
-      </div></details>
-    </article>
-  </section>
-
-
-  <section class="diagram" aria-label="生成与使用挂钩图">
-    <div class="h">生成 ↔ 使用挂钩</div>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 72" role="img" aria-labelledby="hk-t hk-d">
-      <title id="hk-t">生成与使用挂钩</title>
-      <desc id="hk-d">对象级高斯到导出、资产库、约束摆放，再到 Acceptance 门禁。</desc>
-      <defs>
-        <marker id="aw2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#8a9fb4"/></marker>
-      </defs>
-      <g font-family="ui-sans-serif,system-ui,sans-serif" font-size="11" text-anchor="middle">
-        <rect x="40" y="20" width="140" height="28" rx="8" fill="#0c121a" stroke="#1c2836"/>
-        <text x="110" y="38" fill="#e8eef7">对象级 GS</text>
-        <rect x="236" y="20" width="100" height="28" rx="8" fill="#0c121a" stroke="#1c2836"/>
-        <text x="286" y="38" fill="#e8eef7">导出</text>
-        <rect x="392" y="20" width="120" height="28" rx="8" fill="rgba(110,168,254,.14)" stroke="#6ea8fe"/>
-        <text x="452" y="38" fill="#e8eef7" font-weight="700">资产库</text>
-        <rect x="568" y="20" width="120" height="28" rx="8" fill="#0c121a" stroke="#1c2836"/>
-        <text x="628" y="38" fill="#e8eef7">约束摆放</text>
-        <rect x="744" y="20" width="140" height="28" rx="8" fill="rgba(110,168,254,.14)" stroke="#6ea8fe"/>
-        <text x="814" y="38" fill="#e8eef7" font-weight="700">Acceptance</text>
-      </g>
-      <g fill="none" stroke="#8a9fb4" stroke-width="1.5" marker-end="url(#aw2)">
-        <path d="M180 34H236"/>
-        <path d="M336 34H392"/>
-        <path d="M512 34H568"/>
-        <path d="M688 34H744"/>
-      </g>
-      <g font-family="ui-sans-serif,system-ui,sans-serif" font-size="10" fill="#8a9fb4">
-        <text x="110" y="64" text-anchor="middle">生成</text>
-        <text x="628" y="64" text-anchor="middle">使用</text>
-      </g>
-    </svg>
-  </section>
-
-  <div class="card ev">
-    <span class="h" style="margin:0">证据带 · 图例</span>
-    <span class="it" title="真源 knowledge/evidence-grades.md"><span class="dot" style="background:var(--ok)"></span><b style="color:var(--ok)">A</b> 代码+协议+真机·同族失败可查</span>
-    <span class="it" title="真源 knowledge/evidence-grades.md"><span class="dot" style="background:var(--cy)"></span><b style="color:var(--cy)">规范</b> 工具/字段规范·不要求真机</span>
-    <span class="it" title="真源 knowledge/evidence-grades.md"><span class="dot" style="background:var(--warn)"></span><b style="color:var(--warn)">B</b> 叙事清楚·落地部分公开·需复现</span>
-    <span class="it" title="真源 knowledge/evidence-grades.md"><span class="dot" style="background:var(--bad)"></span><b style="color:var(--bad)">C</b> 演示/二手/无基准·不建卡</span>
+  <div class="maturity-row" role="group" aria-label="四命题成熟度（定性·人工判断·非测量值）">
+    <div class="mat"><span>生成 · 可拆积木</span><b title="2026-11-08 · MuJoCo 真机链已补；Isaac 对象级仍薄 · 人工判断">可用</b></div>
+    <div class="mat"><span>使用 · 多源成景</span><b title="2026-11-08 · 默认栈不换；SimReady 门禁补强中 · 人工判断">可用</b></div>
+    <div class="mat"><span title="RSI：递归自改进——任务技能快环+元技能慢环，避免方法栈冻结">RSI · 不冻栈</span><b title="2026-11-08 · 方法论+skill 在线；慢环审计刚起步 · 人工判断">探索</b></div>
+    <div class="mat"><span>总控 · 判官台</span><b title="2026-11-08 · 采信规则在线；开放问题驱动采矿 · 人工判断">可用</b></div>
   </div>
-</main>
-<footer>
-  <details>
-    <summary>证据带 · 仓库地图</summary>
-    <div class="fg">
-      <div><b>可拆积木</b><br>ObjectGS + DIGS → DISCOVERSE；Flats ∥ AtlasGS；RQS ∥ Inpaint360GS；mesh → Scalable Real2Sim</div>
-      <div><b>多源成景</b><br>AffordCraft → LayoutVLM/Steerable → 门禁；G ↔ SimReady FET+Bench；Acceptance 资产/场景门禁族</div>
-      <div><b>不冻栈</b><br>快环 skill + 慢环 meta · stage-win；dashboard-sync · proposition-mine-return · specialist-harness · knowledge-brain-rsi · stage-win-card · real2sim-diagnose</div>
-      <div><b>判官台</b><br>三问 → 六步诊断 → A/B/C → knowledge/ + cards/；Page 523c7b67…</div>
+  <p class="cap">成熟度·人工判断·非测量值 · 真源 <code>knowledge/maturity.md</code> · 导读 <code>knowledge/board-intro.md</code></p>
+</header>
+
+<!-- ========== A · 主价值链 ========== -->
+<section class="band band-a" id="zone-a" aria-labelledby="h-a">
+  <div class="band-head">
+    <h2 id="h-a">A · 主价值链</h2>
+    <span class="role">最高权重</span>
+    <span class="weight">主链 · 可点节点开抽屉</span>
+  </div>
+  <p class="hint">七段：真实数据→对象级建模→仿真资产→场景组织→仿真评估→真机对照→反馈。状态用<strong>线型+文字</strong>（不只靠颜色）。区段标注「可拆积木」「多源成景」。点击节点打开六字段抽屉（真源或待定义）。</p>
+
+  <div class="chain-wrap">
+    <div>
+      <div class="svg-frame">
+        <svg class="chain" viewBox="0 0 720 220" role="img" aria-labelledby="chain-title chain-desc">
+          <title id="chain-title">Real→Sim→Real 主价值链七节点（示意）</title>
+          <desc id="chain-desc">从左到右：真实数据、对象级建模、仿真资产、场景组织、仿真评估、真机对照、反馈。实线=已有外部证据；虚线=待本机验证；点线=关键缺口。正交折线连接。</desc>
+
+          <text x="12" y="18" fill="#c4785a" font-size="12" font-family="system-ui,sans-serif">主链（示意）</text>
+
+          <!-- N1 -->
+          <g class="node-btn" data-node="真实数据" tabindex="0" role="button" aria-pressed="false" aria-label="打开节点：真实数据">
+            <rect x="12" y="50" width="86" height="44" rx="6" fill="#242830" stroke="#8a9a7a" stroke-width="2"/>
+            <text x="55" y="70" text-anchor="middle" fill="#c8cdd5" font-size="11" font-family="system-ui,sans-serif">真实数据</text>
+            <text x="55" y="86" text-anchor="middle" fill="#8a9a7a" font-size="9" font-family="system-ui,sans-serif">外部证据</text>
+          </g>
+          <path d="M98 72 H118" fill="none" stroke="#8a9a7a" stroke-width="2"/>
+          <polygon points="118,68 128,72 118,76" fill="#8a9a7a"/>
+
+          <!-- N2 -->
+          <g class="node-btn" data-node="对象级建模" tabindex="0" role="button" aria-pressed="false" aria-label="打开节点：对象级建模">
+            <rect x="128" y="50" width="86" height="44" rx="6" fill="#242830" stroke="#b0a070" stroke-width="2" stroke-dasharray="5 3"/>
+            <text x="171" y="70" text-anchor="middle" fill="#c8cdd5" font-size="11" font-family="system-ui,sans-serif">对象级建模</text>
+            <text x="171" y="86" text-anchor="middle" fill="#b0a070" font-size="9" font-family="system-ui,sans-serif">待本机验证</text>
+          </g>
+          <path d="M214 72 H234" fill="none" stroke="#b0a070" stroke-width="2" stroke-dasharray="5 3"/>
+          <polygon points="234,68 244,72 234,76" fill="#b0a070"/>
+
+          <!-- N3 -->
+          <g class="node-btn" data-node="仿真资产" tabindex="0" role="button" aria-pressed="false" aria-label="打开节点：仿真资产">
+            <rect x="244" y="50" width="86" height="44" rx="6" fill="#2c323c" stroke="#c4785a" stroke-width="2.5"/>
+            <text x="287" y="68" text-anchor="middle" fill="#c4785a" font-size="11" font-family="system-ui,sans-serif">仿真资产</text>
+            <text x="287" y="84" text-anchor="middle" fill="#8a9a7a" font-size="9" font-family="system-ui,sans-serif">外部证据</text>
+          </g>
+          <path d="M330 72 H350" fill="none" stroke="#8a9a7a" stroke-width="2"/>
+          <polygon points="350,68 360,72 350,76" fill="#8a9a7a"/>
+
+          <!-- N4 -->
+          <g class="node-btn" data-node="场景组织" tabindex="0" role="button" aria-pressed="false" aria-label="打开节点：场景组织">
+            <rect x="360" y="50" width="86" height="44" rx="6" fill="#242830" stroke="#b0a070" stroke-width="2" stroke-dasharray="5 3"/>
+            <text x="403" y="70" text-anchor="middle" fill="#c8cdd5" font-size="11" font-family="system-ui,sans-serif">场景组织</text>
+            <text x="403" y="86" text-anchor="middle" fill="#b0a070" font-size="9" font-family="system-ui,sans-serif">待本机验证</text>
+          </g>
+          <path d="M446 72 H466" fill="none" stroke="#b0a070" stroke-width="2" stroke-dasharray="5 3"/>
+          <polygon points="466,68 476,72 466,76" fill="#b0a070"/>
+
+          <!-- N5 -->
+          <g class="node-btn" data-node="仿真评估" tabindex="0" role="button" aria-pressed="false" aria-label="打开节点：仿真评估">
+            <rect x="476" y="50" width="86" height="44" rx="6" fill="#242830" stroke="#8a9a7a" stroke-width="2"/>
+            <text x="519" y="70" text-anchor="middle" fill="#c8cdd5" font-size="11" font-family="system-ui,sans-serif">仿真评估</text>
+            <text x="519" y="86" text-anchor="middle" fill="#8a9a7a" font-size="9" font-family="system-ui,sans-serif">外部证据</text>
+          </g>
+          <path d="M562 72 H582" fill="none" stroke="#9a7070" stroke-width="2.5" stroke-dasharray="2 3"/>
+          <polygon points="582,68 592,72 582,76" fill="#9a7070"/>
+
+          <!-- N6 -->
+          <g class="node-btn" data-node="真机对照" tabindex="0" role="button" aria-pressed="false" aria-label="打开节点：真机对照">
+            <rect x="592" y="50" width="86" height="44" rx="6" fill="#242830" stroke="#9a7070" stroke-width="2" stroke-dasharray="2 3"/>
+            <text x="635" y="70" text-anchor="middle" fill="#c8cdd5" font-size="11" font-family="system-ui,sans-serif">真机对照</text>
+            <text x="635" y="86" text-anchor="middle" fill="#9a7070" font-size="9" font-family="system-ui,sans-serif">关键缺口</text>
+          </g>
+
+          <!-- feedback loop orthogonal -->
+          <path d="M635 94 V130 H55 V94" fill="none" stroke="#7a8494" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <polygon points="55,94 51,104 59,104" fill="#7a8494"/>
+          <text x="340" y="148" text-anchor="middle" fill="#7a8494" font-size="11" font-family="system-ui,sans-serif">反馈（闭环 · 示意）</text>
+
+          <g class="node-btn" data-node="反馈" tabindex="0" role="button" aria-pressed="false" aria-label="打开节点：反馈">
+            <rect x="300" y="158" width="80" height="28" rx="4" fill="#242830" stroke="#7a8494" stroke-width="1.5"/>
+            <text x="340" y="176" text-anchor="middle" fill="#c8cdd5" font-size="11" font-family="system-ui,sans-serif">⑦ 反馈</text>
+          </g>
+
+          <!-- responsibility bands -->
+          <rect x="128" y="195" width="202" height="18" rx="3" fill="none" stroke="#6a8a9e" stroke-width="1"/>
+          <text x="229" y="208" text-anchor="middle" fill="#6a8a9e" font-size="10" font-family="system-ui,sans-serif">可拆积木负责区段（建模→资产）</text>
+          <rect x="360" y="195" width="202" height="18" rx="3" fill="none" stroke="#6a8a9e" stroke-width="1"/>
+          <text x="461" y="208" text-anchor="middle" fill="#6a8a9e" font-size="10" font-family="system-ui,sans-serif">多源成景负责区段（场景→评估）</text>
+        </svg>
+      </div>
+      <div class="legend">
+        <span class="solid"><i></i>实线+文：已有外部证据</span>
+        <span class="dashed"><i></i>虚线+文：待本机验证</span>
+        <span class="dotted"><i></i>点线+文：关键缺口</span>
+      </div>
     </div>
-  </details>
+
+    <aside class="drawer" id="drawer-aside" aria-live="polite">
+      <div id="drawer-empty" class="empty-hint">点击主链节点查看六字段抽屉</div>
+      <div id="drawer-panel" hidden>
+        <button type="button" class="drawer-close" id="drawer-close" aria-label="关闭抽屉">关闭</button>
+        <h3 id="drawer-title">节点</h3>
+        <div class="fields" id="drawer-fields" aria-label="节点字段"></div>
+        <div class="drawer-src" id="drawer-src"></div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<dialog class="drawer-dialog" id="drawer-dialog" aria-modal="true" aria-labelledby="dlg-title">
+  <button type="button" class="drawer-close" id="dlg-close">关闭</button>
+  <h3 id="dlg-title" data-dlg-title>节点</h3>
+  <div class="fields" data-dlg-fields aria-label="节点字段"></div>
+  <div class="drawer-src" data-dlg-src></div>
+</dialog>
+
+<!-- ========== B · 两支路 ========== -->
+<section class="band band-b" id="zone-b" aria-labelledby="h-b">
+  <div class="band-head">
+    <h2 id="h-b">B · 两支路（生成 ∥ 使用）</h2>
+    <span class="role">高权重</span>
+    <span class="weight">各：输入 → 方法 → 产出</span>
+  </div>
+  <p class="hint">左右两大区；标介入点；真实案例位空。禁止伪造实验输出当真实效果。</p>
+
+  <div class="branches">
+    <div class="branch">
+      <h3>可拆积木 · 生成层</h3>
+      <div class="sub">命题真源：propositions/可拆积木.md · 等级 B→A- · 成熟度：可用（人工判断）</div>
+      <div class="pipe" aria-label="输入-方法-产出">
+        <div class="cell"><strong>输入</strong>对象/像素标注</div>
+        <div class="arrow">→</div>
+        <div class="cell"><strong>方法</strong>对象级 GS 栈</div>
+        <div class="arrow">→</div>
+        <div class="cell"><strong>产出</strong>可组合仿真资产</div>
+      </div>
+      <div class="intervene">
+        <div class="t">介入点 · 可拆积木</div>
+        ObjectGS（对象 densify）→ DIGS（边界保真）→ DISCOVERSE（MuJoCo 真机闭环）· 导出 Scalable Real2Sim
+      </div>
+      <div class="case-slot">【真实案例位 · 空】<br/>待有本机/可复核案例再填 · 勿贴假图</div>
+      <div class="forbid">禁止：把论文截图/Agent 生成图当作本机效果</div>
+      <div class="fields" aria-label="可拆积木字段" style="margin-top:12px">
+        <div class="fl"><b>目标</b><span>对象/像素标注 → 可编辑可复用、可组合进仿真的对象级 GS 资产</span></div>
+        <div class="fl"><b>推荐技术组合</b><span>假设：ObjectGS + DIGS → DISCOVERSE；已验证：MuJoCo 真机（DISCOVERSE）；Isaac 侧未验证</span></div>
+        <div class="fl"><b>最近关键证据</b><span>DISCOVERSE / ObjectGS / DIGS / AtlasGS 等已并网 · 见 knowledge/cards/</span></div>
+        <div class="fl"><b>未解瓶颈</b><span>Isaac 对象级可组合真机对照仍缺；Flats∥AtlasGS；RQS∥Inpaint360GS</span></div>
+        <div class="fl"><b>下一实验</b><span>Isaac 对象级真机对照记录；成功准则：待定义</span></div>
+      </div>
+    </div>
+
+    <div class="branch">
+      <h3>多源成景 · 使用层</h3>
+      <div class="sub">命题真源：propositions/多源成景.md · 等级 B→A- · 成熟度：可用（人工判断）</div>
+      <div class="pipe" aria-label="输入-方法-产出">
+        <div class="cell"><strong>输入</strong>文本/图/视频/点云</div>
+        <div class="arrow">→</div>
+        <div class="cell"><strong>方法</strong>检索+约束摆放</div>
+        <div class="arrow">→</div>
+        <div class="cell"><strong>产出</strong>过门禁可仿真场景</div>
+      </div>
+      <div class="intervene">
+        <div class="t">介入点 · 多源成景</div>
+        AffordCraft → LayoutVLM / Steerable → 门禁（SimReady <abbr title="字段/验收规范族（如 SimReady FET：Settle/Inertia/Joint/Grasp 等）">FET</abbr> / SimReadyBench）→ 仿真对照（X2Real 等）
+      </div>
+      <div class="case-slot">【真实案例位 · 空】<br/>待有 gate-pass / 对照记录再填 · 勿贴假图</div>
+      <div class="forbid">禁止：伪造 % 或未跑实验成功线</div>
+      <div class="fields" aria-label="多源成景字段" style="margin-top:12px">
+        <div class="fl"><b>目标</b><span>多源输入 → 检索适配 + 约束摆放 → 过门禁的可仿真场景</span></div>
+        <div class="fl"><b>推荐技术组合</b><span>假设：AffordCraft → LayoutVLM/Steerable → 门禁；已验证：默认栈不换；SimReady 规范/工具轨补强</span></div>
+        <div class="fl"><b>最近关键证据</b><span>SimReady-Foundation / SimReadyBench / X2Real 等已并网</span></div>
+        <div class="fl"><b>未解瓶颈</b><span>AffordCraft G ↔ SimReady FET 映射；场景×资产联合协议；gate-pass slope</span></div>
+        <div class="fl"><b>下一实验</b><span>FET 映射表；成功准则：待定义</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== C · 证据与下一步 ========== -->
+<section class="band band-c" id="zone-c" aria-labelledby="h-c">
+  <div class="band-head">
+    <h2 id="h-c">C · 证据与下一步</h2>
+    <span class="role">强交互</span>
+    <span class="weight">证据矩阵 + 优先实验 ≤3</span>
+  </div>
+  <p class="hint">矩阵列对齐 maturity / evidence-grades / open-questions / cards。下一实验只突出 P1–P3；缺标待定义，不造成功线。</p>
+
+  <div class="c-grid">
+    <div>
+      <table class="matrix" aria-label="证据矩阵">
+        <thead>
+          <tr>
+            <th>命题</th>
+            <th>成熟度（人工）</th>
+            <th>关键证据等级</th>
+            <th>开放问题</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>可拆积木</td>
+            <td>可用（人工判断·非测量值）</td>
+            <td>A- 卡若干（DISCOVERSE / AtlasGS 等）；真机 MuJoCo 已有</td>
+            <td>Isaac 对象级对照；Flats∥AtlasGS；RQS∥Inpaint360GS</td>
+          </tr>
+          <tr>
+            <td>多源成景</td>
+            <td>可用（人工判断·非测量值）</td>
+            <td>A- / 规范·工具轨（SimReady）；X2Real 场景级</td>
+            <td>FET 映射表；场景×资产协议；gate-pass slope</td>
+          </tr>
+          <tr>
+            <td>不冻栈</td>
+            <td>探索（人工判断）</td>
+            <td>技能/门禁在线（非方法真机 A）</td>
+            <td>快环漏记；慢环晋升门禁松紧</td>
+          </tr>
+          <tr>
+            <td>判官台</td>
+            <td>可用（人工判断）</td>
+            <td>采信规则在线</td>
+            <td>跨方法仿真→真机排序；失败同族量化</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="grade-legend" aria-label="证据带 · 图例">
+        <span class="it"><b style="color:var(--ok)">A</b> 代码+协议+真机·同族失败可查</span>
+        <span class="it"><b>规范</b> 工具/字段规范·不要求真机</span>
+        <span class="it"><b style="color:var(--warn)">B</b> 叙事清楚·落地部分公开·需复现</span>
+        <span class="it"><b style="color:var(--gap)">C</b> 演示/二手/无基准·不建卡</span>
+      </div>
+      <p class="cap">最近并网（节选）：
+        <a href="https://github.com/Milesssssss/real2sim-research/blob/main/knowledge/cards/DISCOVERSE.md">DISCOVERSE</a>（A-·开源复现）·
+        <a href="https://github.com/Milesssssss/real2sim-research/blob/main/knowledge/cards/AtlasGS.md">AtlasGS</a>（A-·外部报道/论文结论）·
+        <a href="https://github.com/Milesssssss/real2sim-research/blob/main/knowledge/cards/SimReady-Foundation.md">SimReady-Foundation</a>（A-·场景适配工程判断）
+      </p>
+    </div>
+    <div>
+      <ul class="slot-list" aria-label="下一实验优先项">
+        <li>
+          <span class="pri">P1</span>
+          <span class="next">Isaac 对象级可组合真机对照（可拆积木）</span>
+          <div class="crit">对照：vs DISCOVERSE MuJoCo · 成功准则：待定义 · 输出物：真机对照记录</div>
+        </li>
+        <li>
+          <span class="pri">P2</span>
+          <span class="next">AffordCraft G ↔ SimReady FET 映射表（多源成景）</span>
+          <div class="crit">对照：待定义 · 成功准则：待定义 · 输出物：字段映射表（未跑不得写成功线）</div>
+        </li>
+        <li>
+          <span class="pri">P3</span>
+          <span class="next">跨方法仿真→真机排序对照表草稿（判官台）</span>
+          <div class="crit">覆盖方法数：待定义 · 成功准则：待定义 · 输入：open-questions + 并网卡缺口</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ========== D · 治理（默认折叠） ========== -->
+<details class="gov band-d" id="zone-d">
+  <summary>D · Agent 治理（默认折叠 · 最低权重 · 勿与 A/B 同级抢首屏）</summary>
+  <p class="hint" style="margin-top:4px">不冻栈 / 判官台 / 采矿→核链→并网。展开后才见内容。术语：
+    <abbr title="递归自改进（Recursive Self-Improvement）——任务技能快环 + 元技能慢环，避免方法栈冻结">RSI</abbr> ·
+    <abbr title="近胜记录——基线→结果→目标→斜率→策略指纹，用于慢环审计">stage-win</abbr> ·
+    <abbr title="并网：证据卡合入看板可见带，不改变命题原意">并网</abbr>
+  </p>
+  <div class="gov-body">
+    <div class="gov-card">
+      <h4>不冻栈 · RSI</h4>
+      <p>task-skill 快环 + meta-skill 慢环 · stage-win 门禁 · 真源 propositions/不冻栈.md</p>
+      <div class="fields" aria-label="不冻栈字段">
+        <div class="fl"><b>目标</b><span>领域变强的同时 agent 判断栈持续进化、禁止冻结</span></div>
+        <div class="fl"><b>下一实验</b><span>周一慢环轻审计纪要；成功准则：待定义</span></div>
+      </div>
+    </div>
+    <div class="gov-card">
+      <h4>判官台 · 总控</h4>
+      <p>第一性原理 → 六步诊断 → A/B/C 采信 · 真源 propositions/判官台.md</p>
+      <div class="fields" aria-label="判官台字段">
+        <div class="fl"><b>目标</b><span>资深专家级路线/风险/实验建议，证据可辩护</span></div>
+        <div class="fl"><b>下一实验</b><span>开放问题驱动采矿窗；排序表草稿；成功准则：待定义</span></div>
+      </div>
+    </div>
+    <div class="gov-card">
+      <h4>采矿 → 核链 → 并网</h4>
+      <p>开放问题驱动采矿窗 · URL 核链后入 knowledge/cards/ · dashboard-sync</p>
+      <div class="fields" aria-label="并网流程字段">
+        <div class="fl"><b>输入</b><span>open-questions.md 未解项 + 并网卡缺口</span></div>
+        <div class="fl"><b>输出</b><span>可辩护卡 / 看板可见并网带</span></div>
+      </div>
+    </div>
+  </div>
+</details>
+
+<footer class="site-foot">
+  真源只读：<code>propositions/</code> · <code>knowledge/board-intro.md</code> · <code>knowledge/glossary.md</code> · <code>knowledge/maturity.md</code> · <code>knowledge/evidence-grades.md</code> · <code>knowledge/cards/</code>
+  · Issue #5 IA 改版 · 示意非真图 · 不合 main 直至编排核链
 </footer>
-<script>
-(()=>{const btns=[...document.querySelectorAll('nav button')];const nodes=[...document.querySelectorAll('[data-p]')];
-const apply=f=>{btns.forEach(b=>{const on=(b.dataset.f||'')===f;b.classList.toggle('active',on);b.setAttribute('aria-pressed',on?'true':'false');});nodes.forEach(el=>{el.classList.toggle('hidden',!(f==='all'||el.getAttribute('data-p')===f));});};
-btns.forEach(b=>b.addEventListener('click',()=>apply(b.dataset.f||'all')));apply('all');})();
-</script>
+
+</div>
+<script src="assets/board.js"></script>
 </body>
 </html>
