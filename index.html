@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Real-to-Sim 研究命题看板</title>
-<!-- research-board-html shadow#3+G
+<!-- research-board-html floor-H+G
 - [x] A 保真：72/78/65/80 与命题等级/瓶颈/下一刀未改
 - [x] B 3秒扫：四卡标题+等级pill+瓶颈/阶段+下一刀行
 - [x] C 芯片化；四卡三行齐；并网单行·色点醒/次于下一刀；accent≤2 打在可拆积木 Isaac 下一刀
@@ -13,10 +13,13 @@
 - [x] F 待 Pages 200
 - [x] G1 下一刀独立行不进 chip 流；遮芯片仍可读状态+下一刀
 - [x] G2 全板 pill+chip；四卡三行节奏；并网单行
-- [x] G3 accent 对焦可拆积木·Isaac；多源 FET 下一刀 muted
+- [x] G3
+- [x] H1 aria-pressed + landmarks + focus-visible
+- [x] H2 contrast tokens raised
+- [x] H3 color≠sole; bars; no pie/ring accent 对焦可拆积木·Isaac；多源 FET 下一刀 muted
 -->
 <style>
-:root{--bg:#090d12;--card:#111823;--ink:#0c121a;--line:#1c2836;--text:#e8eef7;--muted:#8aa0b5;--dim:#5f7388;--ok:#3dd68c;--warn:#f5a524;--bad:#f31260;--acc:#6ea8fe;--cy:#39d0d8}
+:root{--bg:#090d12;--card:#111823;--ink:#0c121a;--line:#1c2836;--text:#e8eef7;--muted:#a3b7cc;--dim:#8a9fb4;--ok:#3dd68c;--warn:#f5a524;--bad:#f31260;--acc:#6ea8fe;--cy:#39d0d8}
 *{box-sizing:border-box}html,body{margin:0}
 body{background:var(--bg);color:var(--text);font:12.5px/1.35 ui-sans-serif,system-ui,-apple-system,"Segoe UI","PingFang SC","Noto Sans SC",sans-serif}
 a{color:var(--muted);text-decoration:none}a:hover{color:var(--text)}
@@ -25,7 +28,9 @@ header h1{margin:0;font-size:14.5px}
 .meta{color:var(--muted);font-size:11px;display:flex;gap:8px;flex-wrap:wrap}
 nav{position:sticky;top:0;z-index:5;display:flex;gap:6px;flex-wrap:wrap;padding:7px 14px;background:rgba(9,13,18,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 nav button{border:1px solid var(--line);background:var(--ink);color:var(--text);border-radius:999px;padding:3px 11px;font:12px inherit;cursor:pointer}
-nav button.active{background:var(--acc);color:#061018;border-color:transparent;font-weight:700}
+nav button:focus{outline:none}
+nav button:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+nav button.active,[aria-pressed="true"]{background:var(--acc);color:#061018;border-color:transparent;font-weight:700}
 main{max-width:1180px;margin:0 auto;padding:10px 14px 36px;display:grid;gap:10px}
 .top{display:grid;gap:10px;grid-template-columns:200px 1fr;align-items:stretch}
 .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px 10px}
@@ -46,7 +51,7 @@ main{max-width:1180px;margin:0 auto;padding:10px 14px 36px;display:grid;gap:10px
 .rc .dotg.a{background:var(--ok)}.rc .dotg.am{background:var(--cy)}.rc .dotg.b{background:var(--warn)}
 .rc .gr{opacity:.92}
 .next.focus{color:var(--acc);font-weight:700;letter-spacing:.1px}
-.next.muted{color:var(--dim);font-weight:500}
+.next.muted{color:var(--muted);font-weight:500}
 .props{display:grid;gap:10px;grid-template-columns:1.15fr 1.15fr .95fr .95fr;align-items:stretch}
 .prop{display:grid;grid-template-rows:auto auto 1fr auto;gap:8px;min-height:132px;position:relative;overflow:visible}
 .row1{display:flex;justify-content:space-between;align-items:center;gap:6px;min-height:28px}
@@ -62,11 +67,11 @@ main{max-width:1180px;margin:0 auto;padding:10px 14px 36px;display:grid;gap:10px
 .pill.run .dot{background:var(--warn)}
 .pill.auth{color:#9fc0f5;border-color:rgba(159,192,245,.35);background:rgba(110,168,254,.08)}
 .pill.auth .dot{background:#9fc0f5}
-.chip{font-size:10.5px;padding:2px 7px;border-radius:6px;background:var(--ink);border:1px solid var(--line);color:#b7c9db;white-space:nowrap}
+.chip{font-size:10.5px;padding:2px 7px;border-radius:6px;background:var(--ink);border:1px solid var(--line);color:#c5d6e8;white-space:nowrap}
 .chip.warn{border-color:rgba(245,165,36,.4);color:#f0c27a}
 .chip.stage{border-color:rgba(138,160,181,.35);color:var(--muted)}
 .chip.stack{color:#a9bdd0}
-.next{font-size:12px;line-height:1.35;font-weight:600;color:var(--muted)}
+.next{font-size:12px;line-height:1.4;font-weight:600;color:var(--text)}
 .next.focus{color:var(--acc)}
 .next.muted{color:var(--dim);font-weight:500}
 details.more{margin:0;min-height:18px}
@@ -77,12 +82,12 @@ details.more[open]>summary::before{content:'▾'}
 details.more>summary .n{font-variant-numeric:tabular-nums;color:var(--muted)}
 details.more .q{position:absolute;left:8px;right:8px;top:calc(100% - 2px);z-index:4;display:flex;flex-wrap:wrap;gap:4px;margin:0;padding:8px;background:var(--card);border:1px solid var(--line);border-radius:10px;box-shadow:none}
 .q .chip{white-space:normal;max-width:100%;line-height:1.3}
-.ev{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;padding:5px 8px!important;opacity:.78}
+.ev{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;padding:5px 8px!important}
 .ev .h{font-size:9.5px;letter-spacing:.5px}
-.ev .it{display:inline-flex;align-items:center;gap:4px;color:var(--dim);font-size:10.5px;cursor:help}
+.ev .it{display:inline-flex;align-items:center;gap:4px;color:var(--muted);font-size:10.5px;cursor:help}
 .ev .it b{font-weight:700;font-size:10px}
 .ev .dot{display:inline-block;width:6px;height:6px}
-footer{max-width:1180px;margin:0 auto;padding:0 14px 22px;color:var(--dim);font-size:10.5px;opacity:.72}
+footer{max-width:1180px;margin:0 auto;padding:0 14px 22px;color:var(--muted);font-size:10.5px}
 footer details{background:transparent;border:1px dashed var(--line);border-radius:8px;padding:5px 8px}
 footer summary{cursor:pointer;color:var(--dim);font-size:10.5px}
 footer details[open]{opacity:1;background:var(--card);border-style:solid}
@@ -99,18 +104,18 @@ footer details[open]{opacity:1;background:var(--card);border-style:solid}
   <h1>Real-to-Sim 研究命题看板</h1>
   <div class="meta"><a href="https://github.com/Milesssssss/real2sim-research">真源仓库</a><span>只看不决策</span><span>2026-11-08 Asia/Shanghai</span></div>
 </header>
-<nav>
-  <button class="active" data-f="all">全部</button>
-  <button data-f="可拆积木">可拆积木</button>
-  <button data-f="多源成景">多源成景</button>
-  <button data-f="不冻栈">不冻栈</button>
-  <button data-f="判官台">判官台</button>
+<nav aria-label="命题筛选">
+  <button type="button" class="active" data-f="all" aria-pressed="true">全部</button>
+  <button type="button" data-f="可拆积木" aria-pressed="false">可拆积木</button>
+  <button type="button" data-f="多源成景" aria-pressed="false">多源成景</button>
+  <button type="button" data-f="不冻栈" aria-pressed="false">不冻栈</button>
+  <button type="button" data-f="判官台" aria-pressed="false">判官台</button>
 </nav>
-<main>
+<main id="board-main">
   <section class="top">
     <div class="card">
       <div class="h">成熟度</div>
-      <div class="mats">
+      <div class="mats" role="group" aria-label="四命题成熟度（长度条）">
         <div class="mat"><span>生成</span><b>72</b><div class="bar"><i style="width:72%"></i></div></div>
         <div class="mat"><span>使用</span><b>78</b><div class="bar"><i style="width:78%"></i></div></div>
         <div class="mat"><span>RSI</span><b>65</b><div class="bar"><i style="width:65%"></i></div></div>
@@ -222,7 +227,7 @@ footer details[open]{opacity:1;background:var(--card);border-style:solid}
 </footer>
 <script>
 (()=>{const btns=[...document.querySelectorAll('nav button')];const nodes=[...document.querySelectorAll('[data-p]')];
-const apply=f=>{btns.forEach(b=>b.classList.toggle('active',(b.dataset.f||'')===f));nodes.forEach(el=>{el.classList.toggle('hidden',!(f==='all'||el.getAttribute('data-p')===f));});};
+const apply=f=>{btns.forEach(b=>{const on=(b.dataset.f||'')===f;b.classList.toggle('active',on);b.setAttribute('aria-pressed',on?'true':'false');});nodes.forEach(el=>{el.classList.toggle('hidden',!(f==='all'||el.getAttribute('data-p')===f));});};
 btns.forEach(b=>b.addEventListener('click',()=>apply(b.dataset.f||'all')));apply('all');})();
 </script>
 </body>
