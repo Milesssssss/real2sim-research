@@ -61,6 +61,11 @@ footer summary{cursor:pointer;color:var(--acc)}
 .fg{display:grid;gap:6px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:8px}
 .fg div{background:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 8px;color:var(--muted);font-size:11px;line-height:1.4}
 .fg b{color:var(--text)}
+
+.chip.warn{border-color:rgba(245,165,36,.45);color:#f0c27a}
+.chip.stage{border-color:rgba(110,168,254,.4);color:#9fc0f5}
+.chips.meta{margin-bottom:1px}
+.prop{min-height:188px}
 @media(max-width:980px){.props{grid-template-columns:repeat(2,minmax(0,1fr))}.bento{grid-template-columns:1fr}}
 @media(max-width:560px){.props{grid-template-columns:1fr}}
 .hidden{display:none!important}
@@ -105,6 +110,7 @@ footer summary{cursor:pointer;color:var(--acc)}
   <section class="props" id="board">
     <article class="card prop" data-p="可拆积木">
       <div class="title"><div><h3>可拆积木</h3><div class="layer">生成层</div></div><span class="pill up" title="等级 B→A-"><span class="dot"></span>B→A-</span></div>
+      <div class="chips meta"><span class="chip warn" title="瓶颈：组合几何资产 + 对象-环境边界保真（非物理优先）">瓶颈·组合几何/边界</span><span class="chip stage" title="阶段：MuJoCo 真机缺口已补（DISCOVERSE）；Isaac 侧仍薄">阶段·MuJoCo✓ Isaac薄</span></div>
       <div class="chips" title="ObjectGS + DIGS → DISCOVERSE（MuJoCo）；Flats ∥ AtlasGS；Remove360 RQS ∥ Inpaint360GS；mesh → Scalable Real2Sim">
         <span class="chip">ObjectGS+DIGS</span><span class="chip">DISCOVERSE</span><span class="chip">Flats∥AtlasGS</span>
       </div>
@@ -118,6 +124,7 @@ footer summary{cursor:pointer;color:var(--acc)}
 
     <article class="card prop" data-p="多源成景">
       <div class="title"><div><h3>多源成景</h3><div class="layer">使用层</div></div><span class="pill up" title="等级 B→A-"><span class="dot"></span>B→A-</span></div>
+      <div class="chips meta"><span class="chip warn" title="瓶颈：资产元数据卡 + 物理/任务约束布局 + 接受门禁">瓶颈·元数据/布局/门禁</span><span class="chip stage" title="阶段：默认栈不换；门禁规范已用 SimReady 补强">阶段·不换栈·门禁补强</span></div>
       <div class="chips" title="AffordCraft → LayoutVLM / Steerable → 门禁；G ↔ SimReady FET + Bench；Acceptance：SimReadyBench / SimFoundry↔YUBI↔Measuring↔X2Real↔R2S-Eval">
         <span class="chip">AffordCraft</span><span class="chip">Layout/Steerable</span><span class="chip">门禁·SimReady</span>
       </div>
@@ -131,6 +138,7 @@ footer summary{cursor:pointer;color:var(--acc)}
 
     <article class="card prop" data-p="不冻栈">
       <div class="title"><div><h3>不冻栈</h3><div class="layer">RSI</div></div><span class="pill run" title="状态：运行中"><span class="dot"></span>运行中</span></div>
+      <div class="chips meta"><span class="chip warn" title="瓶颈：快环技能化 vs 慢环元技能晋升门槛">瓶颈·快环/慢环门禁</span><span class="chip stage" title="阶段：方法论+skill+周一慢环在线">阶段·慢环在线</span></div>
       <div class="chips" title="task-skill 快环 + meta-skill 慢环 · stage-win 门禁 · Page/memory/本库 晋升">
         <span class="chip">task-skill 快环</span><span class="chip">meta 慢环</span><span class="chip">stage-win</span>
       </div>
@@ -143,6 +151,7 @@ footer summary{cursor:pointer;color:var(--acc)}
 
     <article class="card prop" data-p="判官台">
       <div class="title"><div><h3>判官台</h3><div class="layer">总控</div></div><span class="pill auth" title="状态：权威"><span class="dot"></span>权威</span></div>
+      <div class="chips meta"><span class="chip warn" title="瓶颈：理论 · 情报 · 落地 三层同时够硬">瓶颈·三层同时够硬</span><span class="chip stage" title="阶段：知识网络持续并网">阶段·持续并网</span></div>
       <div class="chips" title="第一性原理三问 → 六步诊断 → A/B/C 采信 → 知识网络 + 本库">
         <span class="chip">三问</span><span class="chip">六步诊断</span><span class="chip">A/B/C 采信</span>
       </div>
