@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Real-to-Sim 研究命题看板</title>
 <!-- research-board-html floor-H+diag2+G
-- [x] A 保真：72/78/65/80 与命题等级/瓶颈/下一刀未改
+- [x] A 保真：成熟度定性（探索|可用|稳固|待评估·人工判断·非测量值）；命题等级/瓶颈/下一刀未改
 - [x] B 3秒扫：四卡标题+等级pill+瓶颈/阶段+下一刀行
 - [x] C 芯片化；四卡三行齐；并网单行·色点醒/次于下一刀；accent≤2 打在可拆积木 Isaac 下一刀
 - [x] D 可筛；单文件；系统字体
@@ -36,8 +36,8 @@ main{max-width:1180px;margin:0 auto;padding:10px 14px 36px;display:grid;gap:10px
 .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px 10px}
 .h{margin:0 0 6px;font-size:10px;letter-spacing:.7px;color:var(--muted);font-weight:700}
 .mats{display:grid;gap:5px}
-.mat{display:grid;grid-template-columns:34px 26px 1fr;gap:6px;align-items:center;color:var(--muted);font-size:11px}
-.mat b{color:var(--text);font-variant-numeric:tabular-nums}
+.mat{display:grid;grid-template-columns:34px 1fr;gap:6px;align-items:center;color:var(--muted);font-size:11px}
+.mat b{color:var(--text)}
 .bar{height:5px;border-radius:99px;background:var(--ink);overflow:hidden}
 .bar>i{display:block;height:100%;background:linear-gradient(90deg,#4d7ab8,var(--cy))}
 .rec{display:flex;flex-wrap:nowrap;gap:6px;overflow-x:auto;padding-bottom:2px}
@@ -120,12 +120,13 @@ footer details[open]{opacity:1;background:var(--card);border-style:solid}
   <section class="top">
     <div class="card">
       <div class="h">成熟度</div>
-      <div class="mats" role="group" aria-label="四命题成熟度（长度条）">
-        <div class="mat"><span>生成</span><b>72</b><div class="bar"><i style="width:72%"></i></div></div>
-        <div class="mat"><span>使用</span><b>78</b><div class="bar"><i style="width:78%"></i></div></div>
-        <div class="mat"><span>RSI</span><b>65</b><div class="bar"><i style="width:65%"></i></div></div>
-        <div class="mat"><span>总控</span><b>80</b><div class="bar"><i style="width:80%"></i></div></div>
+      <div class="mats" role="group" aria-label="四命题成熟度（定性·人工判断·非测量值）">
+        <div class="mat"><span>生成</span><b title="2026-11-08 · MuJoCo 真机链已补；Isaac 对象级仍薄 · 人工判断">可用</b></div>
+        <div class="mat"><span>使用</span><b title="2026-11-08 · 默认栈不换；SimReady 门禁补强中 · 人工判断">可用</b></div>
+        <div class="mat"><span>RSI</span><b title="2026-11-08 · 方法论+skill 在线；慢环审计刚起步 · 人工判断">探索</b></div>
+        <div class="mat"><span>总控</span><b title="2026-11-08 · 采信规则在线；开放问题驱动采矿 · 人工判断">可用</b></div>
       </div>
+      <p class="cap" style="margin:4px 0 0;font-size:10px;color:var(--dim)">成熟度·人工判断·非测量值 · 真源 knowledge/maturity.md</p>
     </div>
     <div class="card">
       <div class="h">证据带 · 最近并网 · 2026-11-08</div>
